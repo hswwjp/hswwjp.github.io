@@ -1,0 +1,1151 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>初学者vim配置 | Hexo</title>
+  <meta name="keywords" content=" vim ">
+  <meta name="description" content="初学者vim配置 | Hexo">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://yoursite.com/archives/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:locale" content="en_US">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="icon" href="/img/avatar.jpg">
+
+<link href="/css/style.css?v=1.0.1" rel="stylesheet">
+
+<link href="/css/hl_theme/atom-light.css?v=1.0.1" rel="stylesheet">
+
+<link href="//cdn.bootcss.com/animate.css/3.5.2/animate.min.css" rel="stylesheet">
+<link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="/js/jquery.autocomplete.min.js?v=1.0.1" ></script>
+
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+<script>
+    hljs.initHighlightingOnLoad();
+</script>
+
+<script src="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.js"></script>
+
+
+
+<script src="//cdn.bootcss.com/jquery-cookie/1.4.1/jquery.cookie.min.js" ></script>
+
+<script src="/js/iconfont.js?v=1.0.1" ></script>
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+<div style="display: none">
+  <input class="theme_disqus_on" value="false">
+  <input class="theme_preload_comment" value="false">
+  <input class="theme_blog_path" value="">
+</div>
+
+<body>
+<aside class="nav">
+    <div class="nav-left">
+        <a href="/" class="avatar_target">
+    <img class="avatar" src="/img/avatar.jpg" />
+</a>
+<div class="author">
+    <span>John Doe</span>
+</div>
+
+<div class="icon">
+    
+        
+        <a title="rss" href="/atom.xml" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-rss"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="github" href="https://github.com/yelog" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-github"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="facebook" href="https://www.facebook.com/faker.tops" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-facebook"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+    
+        
+    
+        
+        <a title="instagram" href="https://www.facebook.com/faker.tops" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-instagram"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="reddit" href="https://www.reddit.com/user/yelog/" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-reddit"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="weibo" href="http://weibo.com/u/2307534817" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-weibo"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="jianshu" href="https://www.jianshu.com/u/ff56736de7cf" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-jianshu"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="zhihu" href="https://www.zhihu.com/people/jaytp/activities" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-zhihu"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+    
+        
+        <a title="oschina" href="https://my.oschina.net/yelog" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-oschina"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+    
+        
+        <a title="email" href="mailto:jaytp@qq.com" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-email"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="qq" href="http://wpa.qq.com/msgrd?v=3&uin=872336115&site=qq&menu=yes" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-qq"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="kugou" href="https://www.kugou.com/" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-kugou"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="neteasemusic" href="https://music.163.com/#/user/home?id=88151013" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-neteasemusic"></use>
+                </svg>
+            
+        </a>
+        
+    
+</div>
+
+
+
+
+<ul>
+    <li><div class="all active">全部文章<small>(37)</small></div></li>
+    
+</ul>
+<div class="left-bottom">
+    <div class="menus">
+    
+    
+    
+    
+    </div>
+    <div><a class="about  hasFriend  site_url"  href="/about">关于</a><a style="width: 50%"  class="friends">友链</a></div>
+</div>
+<input type="hidden" id="yelog_site_posts_number" value="37">
+
+<div style="display: none">
+    <span id="busuanzi_value_site_uv"></span>
+    <span id="busuanzi_value_site_pv"></span>
+</div>
+
+    </div>
+    <div class="nav-right">
+        <div class="friends-area">
+    <div class="friends-title">
+        友情链接
+        <i class="back-title-list"></i>
+    </div>
+    <div class="friends-content">
+        <ul>
+            
+            <li><a target="_blank" href="http://yelog.org/">叶落阁</a></li>
+            
+        </ul>
+    </div>
+</div>
+        <div class="title-list">
+    <form onkeydown="if(event.keyCode==13){return false;}">
+        <input class="search" type="text" placeholder="Search..." autocomplete="off"id="local-search-input" >
+        <i class="cross"></i>
+        <span>
+            <label for="tagswitch">Tags:</label>
+            <input id="tagswitch" type="checkbox" style="display: none" />
+            <i id="tagsWitchIcon"></i>
+        </span>
+    </form>
+    <div class="tags-list">
+    
+    <li class="article-tag-list-item">
+        <a class="color2">vscode</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">linux</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">command</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">macos</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">proxy</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">springboot</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">java</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">plugin</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">manjaro</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">pacman</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">software</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">mac</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">exception</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">math</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">计算机原理</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">待分析</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">spring</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">docker</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">jvm</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">maven</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">消费心理学</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">生活</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">情商</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">耳机</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">vim</a>
+    </li>
+    
+    <div class="clearfix"></div>
+</div>
+
+    
+    <nav id="title-list-nav">
+        
+        <a  class=""
+           href="/2020/01/20/%E5%B7%A5%E5%85%B7/Linux/Manjaro%E5%AE%89%E8%A3%85%E5%8F%8A%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/"
+           data-tag="linux,manjaro,pacman,software"
+           data-author="" >
+            <span class="post-title" title="Manjaro安装及开发环境配置">Manjaro安装及开发环境配置</span>
+            <span class="post-date" title="2020-01-20 13:51:54">2020/01/20</span>
+        </a>
+        
+        <a  class=""
+           href="/2020/01/18/%E5%B7%A5%E5%85%B7/Linux/%E7%BB%88%E7%AB%AF%E4%BB%A3%E7%90%86/"
+           data-tag="linux,proxy"
+           data-author="" >
+            <span class="post-title" title="终端代理">终端代理</span>
+            <span class="post-date" title="2020-01-18 16:01:04">2020/01/18</span>
+        </a>
+        
+        <a  class=""
+           href="/2020/01/20/%E5%B7%A5%E5%85%B7/Mac/Hidden-Bar-%E6%8A%98%E5%8F%A0macOS%E8%8F%9C%E5%8D%95%E6%A0%8F/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="Hidden Bar,折叠macOS菜单栏">Hidden Bar,折叠macOS菜单栏</span>
+            <span class="post-date" title="2020-01-20 14:14:52">2020/01/20</span>
+        </a>
+        
+        <a  class=""
+           href="/2020/01/20/%E5%B7%A5%E5%85%B7/Mac/%E5%BF%AB%E9%80%9F%E6%89%93%E5%BC%80%E6%88%96%E5%88%87%E6%8D%A2%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E7%9A%84%E5%B7%A5%E5%85%B7-Thor/"
+           data-tag="software,mac"
+           data-author="" >
+            <span class="post-title" title="快速打开或切换应用程序的工具:Thor">快速打开或切换应用程序的工具:Thor</span>
+            <span class="post-date" title="2020-01-20 14:12:51">2020/01/20</span>
+        </a>
+        
+        <a  class=""
+           href="/2020/01/20/%E6%8A%80%E6%9C%AF/%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80%E8%AF%BE/%E8%BF%AD%E4%BB%A3%E6%B3%95/"
+           data-tag="math"
+           data-author="" >
+            <span class="post-title" title="迭代法">迭代法</span>
+            <span class="post-date" title="2020-01-20 14:21:03">2020/01/20</span>
+        </a>
+        
+        <a  class=""
+           href="/2020/01/20/%E6%8A%80%E6%9C%AF/Exception/foreach%E5%BE%AA%E7%8E%AF%E6%8A%A5%E9%94%99/"
+           data-tag="java,exception"
+           data-author="" >
+            <span class="post-title" title="foreach循环报错">foreach循环报错</span>
+            <span class="post-date" title="2020-01-20 14:19:47">2020/01/20</span>
+        </a>
+        
+        <a  class=""
+           href="/2020/01/20/%E6%8A%80%E6%9C%AF/%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80%E8%AF%BE/%E6%95%B0%E5%AD%A6%E5%BD%92%E7%BA%B3%E6%B3%95/"
+           data-tag="math"
+           data-author="" >
+            <span class="post-title" title="数学归纳法">数学归纳法</span>
+            <span class="post-date" title="2020-01-20 14:25:32">2020/01/20</span>
+        </a>
+        
+        <a  class=""
+           href="/2020/01/20/%E6%8A%80%E6%9C%AF/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%9F%BA%E7%A1%80/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="数据结构基础">数据结构基础</span>
+            <span class="post-date" title="2020-01-20 14:30:11">2020/01/20</span>
+        </a>
+        
+        <a  class=""
+           href="/2020/01/20/%E6%8A%80%E6%9C%AF/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86/%E7%AE%80%E5%8D%95%E8%A7%A3%E9%87%8A%E5%99%A8/"
+           data-tag="计算机原理"
+           data-author="" >
+            <span class="post-title" title="简单&#34;解释器&#34;">简单&#34;解释器&#34;</span>
+            <span class="post-date" title="2020-01-20 14:28:20">2020/01/20</span>
+        </a>
+        
+        <a  class=""
+           href="/2020/01/20/%E6%8A%80%E6%9C%AF/Java/Java-%E6%A0%87%E7%AD%BE-label/"
+           data-tag="java"
+           data-author="" >
+            <span class="post-title" title="Java - 标签(label)">Java - 标签(label)</span>
+            <span class="post-date" title="2020-01-20 14:55:42">2020/01/20</span>
+        </a>
+        
+        <a  class=""
+           href="/2020/01/20/%E6%8A%80%E6%9C%AF/Java/transient%E4%BD%BF%E7%94%A8%E7%BB%86%E8%8A%82%E2%80%94%E2%80%94%E8%A2%ABtransient%E5%85%B3%E9%94%AE%E5%AD%97%E4%BF%AE%E9%A5%B0%E7%9A%84%E5%8F%98%E9%87%8F%E7%9C%9F%E7%9A%84%E4%B8%8D%E8%83%BD%E8%A2%AB%E5%BA%8F%E5%88%97%E5%8C%96%E5%90%97/"
+           data-tag="java"
+           data-author="" >
+            <span class="post-title" title="transient使用细节——被transient关键字修饰的变量真的不能被序列化吗?">transient使用细节——被transient关键字修饰的变量真的不能被序列化吗?</span>
+            <span class="post-date" title="2020-01-20 14:58:05">2020/01/20</span>
+        </a>
+        
+        <a  class=""
+           href="/2020/01/20/%E6%8A%80%E6%9C%AF/Java/transient%E5%85%B3%E9%94%AE%E5%AD%97%E4%BD%BF%E7%94%A8%E4%BB%A5%E5%8F%8AJava%E5%BA%8F%E5%88%97%E5%8C%96%E7%9A%84%E4%B8%A4%E7%A7%8D%E6%96%B9%E5%BC%8F/"
+           data-tag="java,待分析"
+           data-author="" >
+            <span class="post-title" title="transient关键字使用以及Java序列化的两种方式">transient关键字使用以及Java序列化的两种方式</span>
+            <span class="post-date" title="2020-01-20 14:57:05">2020/01/20</span>
+        </a>
+        
+        <a  class=""
+           href="/2020/01/20/%E6%8A%80%E6%9C%AF/Java/%E4%BB%80%E4%B9%88%E6%98%AFjava-awt/"
+           data-tag="java"
+           data-author="" >
+            <span class="post-title" title="什么是java.awt">什么是java.awt</span>
+            <span class="post-date" title="2020-01-20 14:46:43">2020/01/20</span>
+        </a>
+        
+        <a  class=""
+           href="/2020/01/19/%E6%8A%80%E6%9C%AF/SpringBoot%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/SpringBoot%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/"
+           data-tag="springboot,java"
+           data-author="" >
+            <span class="post-title" title="SpringBoot源码解读">SpringBoot源码解读</span>
+            <span class="post-date" title="2020-01-19 11:53:34">2020/01/19</span>
+        </a>
+        
+        <a  class=""
+           href="/2020/01/20/%E6%8A%80%E6%9C%AF/Java%E6%BA%90%E7%A0%81/%E6%AD%BB%E7%A3%95Java%E9%9B%86%E5%90%88%E4%B9%8BArrayList%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/"
+           data-tag="java,待分析"
+           data-author="" >
+            <span class="post-title" title="死磕Java集合之ArrayList源码分析">死磕Java集合之ArrayList源码分析</span>
+            <span class="post-date" title="2020-01-20 14:59:52">2020/01/20</span>
+        </a>
+        
+        <a  class=""
+           href="/2020/01/20/%E6%8A%80%E6%9C%AF/%E4%B8%80%E8%B5%B7%E5%AD%A6Spring/Spring%E7%BC%96%E7%A8%8B%E6%A8%A1%E5%9E%8B/"
+           data-tag="java,spring"
+           data-author="" >
+            <span class="post-title" title="Spring编程模型">Spring编程模型</span>
+            <span class="post-date" title="2020-01-20 14:41:59">2020/01/20</span>
+        </a>
+        
+        <a  class=""
+           href="/2020/01/20/%E6%8A%80%E6%9C%AF/Docker/Docker-Stats-%E6%9F%A5%E7%9C%8Bdocker%E5%8D%A0%E7%94%A8%E8%B5%84%E6%BA%90/"
+           data-tag="docker"
+           data-author="" >
+            <span class="post-title" title="Docker Stats: 查看docker占用资源">Docker Stats: 查看docker占用资源</span>
+            <span class="post-date" title="2020-01-20 14:45:09">2020/01/20</span>
+        </a>
+        
+        <a  class=""
+           href="/2020/01/20/%E6%8A%80%E6%9C%AF/Java%E6%BA%90%E7%A0%81/%E6%AD%BB%E7%A3%95java%E9%9B%86%E5%90%88%E4%B9%8BHashMap%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/"
+           data-tag="java,待分析"
+           data-author="" >
+            <span class="post-title" title="死磕java集合之HashMap源码分析">死磕java集合之HashMap源码分析</span>
+            <span class="post-date" title="2020-01-20 15:03:14">2020/01/20</span>
+        </a>
+        
+        <a  class=""
+           href="/2020/01/20/%E6%8A%80%E6%9C%AF/JVM/JVM-%E5%B8%B8%E9%87%8F%E6%B1%A0/"
+           data-tag="java,jvm"
+           data-author="" >
+            <span class="post-title" title="JVM_常量池">JVM_常量池</span>
+            <span class="post-date" title="2020-01-20 15:04:21">2020/01/20</span>
+        </a>
+        
+        <a  class=""
+           href="/2020/01/20/%E6%8A%80%E6%9C%AF/JVM/JVM-%E6%96%B9%E6%B3%95%E8%B0%83%E7%94%A8/"
+           data-tag="java,jvm"
+           data-author="" >
+            <span class="post-title" title="JVM_方法调用">JVM_方法调用</span>
+            <span class="post-date" title="2020-01-20 15:15:47">2020/01/20</span>
+        </a>
+        
+        <a  class=""
+           href="/2020/01/20/%E6%8A%80%E6%9C%AF/JVM/i++%E3%80%81++i%E5%AD%97%E8%8A%82%E7%A0%81/"
+           data-tag="java,jvm"
+           data-author="" >
+            <span class="post-title" title="i++、++i字节码">i++、++i字节码</span>
+            <span class="post-date" title="2020-01-20 15:19:02">2020/01/20</span>
+        </a>
+        
+        <a  class=""
+           href="/2020/01/20/%E6%8A%80%E6%9C%AF/JVM/JVM-%E5%AE%98%E6%96%B9%E6%96%87%E6%A1%A3/"
+           data-tag="java,jvm"
+           data-author="" >
+            <span class="post-title" title="JVM_官方文档">JVM_官方文档</span>
+            <span class="post-date" title="2020-01-20 15:18:27">2020/01/20</span>
+        </a>
+        
+        <a  class=""
+           href="/2020/01/20/%E6%8A%80%E6%9C%AF/Linux/echo%E5%91%BD%E4%BB%A4/"
+           data-tag="linux,command"
+           data-author="" >
+            <span class="post-title" title="echo命令">echo命令</span>
+            <span class="post-date" title="2020-01-20 15:21:30">2020/01/20</span>
+        </a>
+        
+        <a  class=""
+           href="/2020/01/20/%E6%8A%80%E6%9C%AF/Maven/dependencyManagement%E4%B8%8Edependencies%E5%8C%BA%E5%88%AB/"
+           data-tag="maven"
+           data-author="" >
+            <span class="post-title" title="dependencyManagement与dependencies区别">dependencyManagement与dependencies区别</span>
+            <span class="post-date" title="2020-01-20 15:24:08">2020/01/20</span>
+        </a>
+        
+        <a  class=""
+           href="/2020/01/20/%E6%8A%80%E6%9C%AF/Spring/Tomcat%E5%9C%A8SpringBoot%E4%B8%AD%E6%98%AF%E5%A6%82%E4%BD%95%E5%90%AF%E5%8A%A8%E7%9A%84/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="Tomcat在SpringBoot中是如何启动的">Tomcat在SpringBoot中是如何启动的</span>
+            <span class="post-date" title="2020-01-20 15:31:06">2020/01/20</span>
+        </a>
+        
+        <a  class=""
+           href="/2020/01/20/%E5%95%86%E5%AD%A6%E9%99%A2/%E5%A4%A7%E6%96%B9%E4%B8%8E%E5%B0%8F%E6%B0%94/"
+           data-tag="消费心理学"
+           data-author="" >
+            <span class="post-title" title="大方与小气">大方与小气</span>
+            <span class="post-date" title="2020-01-20 15:50:30">2020/01/20</span>
+        </a>
+        
+        <a  class=""
+           href="/2020/01/19/%E5%B0%8F%E6%8A%80%E5%B7%A7/Mac/Mac-OSX%E7%BB%88%E7%AB%AF%E8%B5%B0shadowsocks%E4%BB%A3%E7%90%86/"
+           data-tag="macos,proxy"
+           data-author="" >
+            <span class="post-title" title="Mac OSX终端走shadowsocks代理">Mac OSX终端走shadowsocks代理</span>
+            <span class="post-date" title="2020-01-19 14:53:33">2020/01/19</span>
+        </a>
+        
+        <a  class=""
+           href="/2020/01/20/%E4%BA%BA%E6%A0%BC/%E4%B8%8D%E5%90%9D%E8%B5%9E%E7%BE%8E/"
+           data-tag="生活,情商"
+           data-author="" >
+            <span class="post-title" title="不吝赞美">不吝赞美</span>
+            <span class="post-date" title="2020-01-20 16:05:49">2020/01/20</span>
+        </a>
+        
+        <a  class=""
+           href="/2020/01/20/%E5%B0%8F%E6%8A%80%E5%B7%A7/Linux/Linux%E5%A6%82%E4%BD%95%E8%AE%A9%E4%B8%80%E6%9D%A1%E5%91%BD%E4%BB%A4%E5%BF%AB%E9%80%9F%E4%BF%AE%E6%94%B9%E7%94%A8%E6%88%B7%E5%AF%86%E7%A0%81/"
+           data-tag="linux,command"
+           data-author="" >
+            <span class="post-title" title="Linux如何让一条命令快速修改用户密码?">Linux如何让一条命令快速修改用户密码?</span>
+            <span class="post-date" title="2020-01-20 15:57:06">2020/01/20</span>
+        </a>
+        
+        <a  class=""
+           href="/2020/01/20/%E5%B0%8F%E6%8A%80%E5%B7%A7/Linux/%E5%A6%82%E4%BD%95%E5%B0%86Linux%E7%9A%84Home%E7%9B%AE%E5%BD%95%E4%B8%8B%E7%9A%84%E6%96%87%E4%BB%B6%E5%A4%B9%E8%AE%BE%E7%BD%AE%E4%B8%BA%E8%8B%B1%E6%96%87/"
+           data-tag="linux"
+           data-author="" >
+            <span class="post-title" title="如何将Linux的Home目录下的文件夹设置为英文">如何将Linux的Home目录下的文件夹设置为英文</span>
+            <span class="post-date" title="2020-01-20 15:56:04">2020/01/20</span>
+        </a>
+        
+        <a  class=""
+           href="/2020/01/20/%E5%B0%8F%E6%8A%80%E5%B7%A7/Mac/MacOS%E9%85%8D%E7%BD%AE%E5%91%BD%E4%BB%A4%E8%A1%8C%E4%B8%8B%E4%BD%BF%E7%94%A8Sublime%E6%89%93%E5%BC%80%E6%96%87%E4%BB%B6/"
+           data-tag="software,mac"
+           data-author="" >
+            <span class="post-title" title="MacOS配置命令行下使用Sublime打开文件">MacOS配置命令行下使用Sublime打开文件</span>
+            <span class="post-date" title="2020-01-20 15:57:58">2020/01/20</span>
+        </a>
+        
+        <a  class=""
+           href="/2020/01/20/%E5%B0%8F%E6%8A%80%E5%B7%A7/Other/%E7%B4%A2%E5%B0%BCWH-1000XM3%E6%81%A2%E5%A4%8D%E5%87%BA%E5%8E%82%E8%AE%BE%E7%BD%AE/"
+           data-tag="耳机"
+           data-author="" >
+            <span class="post-title" title="索尼WH 1000XM3恢复出厂设置">索尼WH 1000XM3恢复出厂设置</span>
+            <span class="post-date" title="2020-01-20 15:58:54">2020/01/20</span>
+        </a>
+        
+        <a  class=""
+           href="/2020/01/20/%E5%B0%8F%E6%8A%80%E5%B7%A7/Common/Vscode/vscode%E5%B0%86tab%E8%BD%AC%E6%88%90%E7%A9%BA%E6%A0%BC/"
+           data-tag="vscode"
+           data-author="" >
+            <span class="post-title" title="vscode将tab转成空格">vscode将tab转成空格</span>
+            <span class="post-date" title="2020-01-20 16:03:56">2020/01/20</span>
+        </a>
+        
+        <a  class=""
+           href="/2020/01/20/%E5%B0%8F%E6%8A%80%E5%B7%A7/Common/Vim/vim%E5%B0%8F%E6%8A%80%E5%B7%A7/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="vim小技巧">vim小技巧</span>
+            <span class="post-date" title="2020-01-20 16:02:40">2020/01/20</span>
+        </a>
+        
+        <a  class=""
+           href="/2020/01/20/%E5%B0%8F%E6%8A%80%E5%B7%A7/Common/Vim/vim%E4%B8%ADdelete%EF%BC%88backspace%EF%BC%89%E9%94%AE%E4%B8%8D%E8%83%BD%E5%90%91%E5%B7%A6%E5%88%A0%E9%99%A4/"
+           data-tag="vim"
+           data-author="" >
+            <span class="post-title" title="vim中delete（backspace）键不能向左删除">vim中delete（backspace）键不能向左删除</span>
+            <span class="post-date" title="2020-01-20 16:03:16">2020/01/20</span>
+        </a>
+        
+        <a  class=""
+           href="/2020/01/20/%E5%B0%8F%E6%8A%80%E5%B7%A7/Common/Vim/%E5%88%9D%E5%AD%A6%E8%80%85vim%E9%85%8D%E7%BD%AE/"
+           data-tag="vim"
+           data-author="" >
+            <span class="post-title" title="初学者vim配置">初学者vim配置</span>
+            <span class="post-date" title="2020-01-20 16:01:21">2020/01/20</span>
+        </a>
+        
+        <a  class=""
+           href="/2020/01/16/%E5%B0%8F%E6%8A%80%E5%B7%A7/Common/Vscode/Vscode%E4%BD%BF%E7%94%A8setting-Sync%E6%8F%92%E4%BB%B6%E5%90%8C%E6%AD%A5%E8%AE%BE%E7%BD%AE/"
+           data-tag="vscode,plugin"
+           data-author="" >
+            <span class="post-title" title="Vscode使用setting Sync插件同步设置">Vscode使用setting Sync插件同步设置</span>
+            <span class="post-date" title="2020-01-16 17:49:36">2020/01/16</span>
+        </a>
+        
+    </nav>
+</div>
+    </div>
+    <div class="hide-list">
+        <div class="semicircle">
+            <div class="brackets first"><</div>
+            <div class="brackets">&gt;</div>
+        </div>
+    </div>
+</aside>
+<div class="post">
+    <div class="pjax">
+        <article id="post-小技巧/Common/Vim/初学者vim配置" class="article article-type-post" itemscope itemprop="blogPost">
+    
+        <h1 class="article-title">初学者vim配置</h1>
+    
+    <div class="article-meta">
+        
+        
+        
+        
+        <span class="tag">
+            
+            <a class="color4">vim</a>
+            
+        </span>
+        
+    </div>
+    <div class="article-meta">
+        
+        创建时间:<time class="date" title='更新时间: 2020-01-20 16:02:23'>2020-01-20 16:01</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        
+        <span id="busuanzi_container_page_pv">
+            阅读:<span id="busuanzi_value_page_pv">
+                <span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </span>
+        </span>
+        
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-基本设置"><span class="toc-text">1 基本设置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-文本编辑设置"><span class="toc-text">2 文本编辑设置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-断行设置"><span class="toc-text">3 断行设置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-其他设置"><span class="toc-text">4 其他设置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-图形界面设置"><span class="toc-text">5 图形界面设置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-条件选择"><span class="toc-text">6 条件选择</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#参考"><span class="toc-text">参考</span></a></li></ol></li></ol>
+    
+<style>
+    .left-col .switch-btn,
+    .left-col .switch-area {
+        display: none;
+    }
+    .toc-level-3 i,
+    .toc-level-3 ol {
+        display: none !important;
+    }
+</style>
+</div>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="1-基本设置"><a href="#1-基本设置" class="headerlink" title="1 基本设置"></a>1 基本设置</h2><ul>
+<li><p>set nocp（或者 set nocompatible）<br><br>该命令指定 VIM 工作在不兼容模式下。在 VIM 之前，出现过一个非常流行的编辑器叫 vi。VIM 许多操作与 vi 很相似，但也有许多操作与 vi 是不一样的。如果使用 <code>:set cp</code> 命令打开了兼容模式开关的话，VIM 将尽可能的模仿 vi 的操作模式。<br>也许有许多人喜欢 “最正统的 vi” 的操作模式，但对于初学者来说，vi 里许多操作是比较不方便的。<br><br>举一个例子：VIM 里允许在 Insert 模式下使用方向键移动光标，而 vi 里在 Insert 模式下是不能移动光标的，必须使用 ESC 退回到 Normal 模式下才行。<br>再举一个例子：vi 里使用 <code>u</code> 命令可以撤销一次先前的操作，再次按下 <code>u</code> 时，将撤销 “撤销” 这个动作本身，也就是我们常说的 “重复”（redo）。而 VIM 里可以使用 <code>u</code> 命令撤销多步操作，“重复” 使用的快捷键是 <code>Ctrl + R</code>。<br><br>使用兼容模式后，VIM将放弃这些新的功能，尽量模仿 vi 的各种操作方式。只有在不兼容模式下，才能更好地发挥 VIM 自身的特点。请务必在你的 <code>.vimrc</code> 中的第一行写上 <code>set nocp</code>。</p>
+</li>
+<li><p>set ru（或者 set ruler）<br><br>该命令打开 VIM 的状态栏标尺。默认情况下，VIM 的状态栏标尺在屏幕底部，它能即时显示当前光标所在位置在文件中的行号、列号，以及对应的整个文件的百分比。打开标尺可以给文件的编辑工作带来一定方便。</p>
+</li>
+<li><p>set hls（或者 set hlsearch）<br><br>搜索时高亮显示被找到的文本。</p>
+</li>
+<li><p>set is（或者 incsearch）<br><br>支持增量搜索，搜索时在未完全输入完毕要检索的文本时就开始检索</p>
+</li>
+<li><p>syntax on<br><br>打开关键字语法高亮。</p>
+</li>
+<li><p>set nu（或者 set number）<br><br>显示行号</p>
+</li>
+<li><p>set relativenumber<br><br>显示相对行号</p>
+</li>
+<li><p>set cursorline<br><br>高亮当前行（青色）</p>
+</li>
+<li><p>set showcmd<br><br>显示命令</p>
+</li>
+<li><p>set showmatch<br><br>显示括号配对情况</p>
+</li>
+<li><p>set mouse=a<br><br>允许鼠标</p>
+</li>
+<li><p>set ignorecase<br><br>搜索结果忽略大小写</p>
+</li>
+<li><p>set autoindent（或者 set ai）<br><br>开启自动缩进</p>
+</li>
+<li><p>set smartindent<br><br>智能选择对齐方式，类似C语言。换行时自动学会缩进</p>
+</li>
+<li><p>set smarttab<br><br>根据文件中其他地方的缩进空格个数来确定一个 tab 是多少个空格</p>
+</li>
+<li><p>set shiftwidth=4（或者 set sw=4）<br><br>自动缩进时是多少个空格</p>
+</li>
+<li><p>set tabstop=4（或者 set ts=4）<br><br>一个tab等于多少空格</p>
+</li>
+<li><p>set scrolloff=3<br><br>光标移动到buffer的顶部和底部时保持 3 行距离</p>
+</li>
+<li><p>set autowrite<br><br>自动保存</p>
+</li>
+<li><p>set autochdir<br><br>自动切换当前目录为当前文件所在的目录</p>
+</li>
+<li><p>set nowrapscan<br><br>关闭扫描到文件两端时重新搜索</p>
+</li>
+<li><p>set nrformats=<br>把所有数字当成十进制</p>
+</li>
+<li><p>set statusline=%F%m%r%h%w%=\ [ft=%Y]\ %{&quot;[fenc=&quot;.(&amp;fenc==&quot;&quot;?&amp;enc:&amp;fenc).((exists(&quot;+bomb&quot;)\ &amp;&amp;\ &amp;bomb)?&quot;+&quot;:&quot;&quot;).&quot;]&quot;}\ [ff=%{&amp;ff}]\ [asc=%03.3b]\ [hex=%02.2B]\ [pos=%04l,%04v][%p%%]\ [len=%L]<br><br>设置状态栏显示的信息</p>
+</li>
+<li><p>set laststatus=2<br>总是显示状态行</p>
+</li>
+<li><p>set backspace=indent,eol,start（或者 set backspace=2；若已设置 <code>set nocp</code> 则无需设置）<br><br>设想这样一个情况：当前光标前面有若干字母，我们按下 i 键进入了 Insert 模式，然后输入了 3 个字母，再按 5 下删除（Backspace）。默认情况下，VIM 仅能删除我们新输入的 3 个字母，然后系统 “嘟嘟” 响两声。如果我们 “set backspace=start”，则可以在删除了新输入的 3 个字母之后，继续向前删除原有的两个字符<br><br>在设想一个情况：有若干行文字，我们把光标移到中间某一行的行首，按 i 键进入 Insert 模式，然后按一下 Backspace。默认情况下，系统会 “嘟” 一声，然后没有任何动静。如果我们 “set backspace=eol”，则可以删除前一行行末的回车，也就是说将两行拼接起来。<br><br>当我们设置了自动缩进后，如果钱义行缩进了一定距离，按下回车后，下一行也会保持相同的缩进。默认情况下，我们不能在 Insert 模式下直接按 Backspace 删除行首的缩进。如果我们 “ste backspace=indent”，则可以开启这一项功能。</p>
+</li>
+<li><p>set whichwrap=b,s,&lt;,&gt;,[,]<br><br>查看帮助：(:help whichwrap)<br><br>默认情况下，在 VIM 中当光标移到一行最左边的时候，我们继续按左键，光标不能回到上一行的最右边。同样的，光标到了一行最右边的时候，我们不能通过继续按右跳到下一行的最左边。但是，通过设置 whichwrap 我们可以对一部分按键开启这项功能。如果想对某一个或几个按键开启到头后自动折向下一行的功能，可以把需要开启的键的代号写到 whichwrap 的参数列表中，各个键之间使用逗号分隔。以下是 whichwrap 支持的按键名称列表：</p>
+<ul>
+<li>b<br><br>在 Normal 或 Visual 模式下按删除（Backspace）键。</li>
+<li>s<br><br>在 Normal 或 Visual 模式下按空格键。</li>
+<li>h<br><br>在 Normal 或 Visual 模式下按 h 键。</li>
+<li>l<br><br>在 Normal 或 Visual 模式下按 l 键。</li>
+<li>&lt;<br><br>在 Normal 或 Visual 模式下按左方向键。</li>
+<li>&gt;<br><br>在 Normal 或 Visual 模式下按右方向键。</li>
+<li>~<br><br>在 Normal 模式下按 ~ 键（翻转当前字母大小写）。</li>
+<li>[<br><br>在 Insert 或 Replace 模式下按左方向键。</li>
+<li>]<br><br>在 Insert 或 Replace 模式下按右方向键。</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p>set encoding=utf-8<br><br>设置当前字符编码为 UTF-8。UTF-8 是支持字符集最多的编码之一，在 UTF-8 下进行工作，会带来许多方便之处。由于 VIM 在运行过程中切换 encoding 会造成许多问题，如提示信息乱码、register 丢失等，因此强烈建议大家在启动 VIM 的时候把 encoding 设置为 UTF-8，在编辑非 UTF-8 的文件时，通过 fileencoding 来进行转码。</p>
+</li>
+<li><p>set langmenu=zh_CN.UTF-8<br><br>使用中文菜单，并使用 UTF-8 编码。如果没有这句的话，在非 UTF-8 的系统，如 Windows 下，用了 UTF-8 的 encoding 后菜单会乱码。</p>
+</li>
+<li><p>language message zh_CN.UTF-8<br><br>使用中文提示信息，并使用 UTF-8编码。如果没有这句的话，在非 UTF-8 的系统，如 Windows 下，用了 UTF-8 的 encoding 后系统提示会乱码。</p>
+</li>
+<li><p>set fileencodings=ucs-bom,utf-8,cp936,gb18030,big5,euc-jp,euc-kr,latin1<br><br>设置编码的自动识别。关于这条设置的详细含义，请参看<a href="http://edyfox.codecarver.org/html/vim_fileencodings_detection.html" target="_blank" rel="noopener">这边文章</a>。</p>
+</li>
+<li><p>set ambiwidth=double<br><br>防止特殊符号无法正常显示。在 Unicode 中，许多来自不同语言的字符，如果字型足够近似的话，会把它们放在同一个编码中。但在不同编码中，字符的宽度是不一样的。例如中文汉语拼音中的 ā 就很宽，而欧洲语言中同样的字符就很窄。当 VIM 工作在 Unicode 状态时，遇到这些宽度不明的字符时，默认使用窄字符，这会导致中文的破折号 “——” 非常短，五角星 “★” 等符号只能显示一半。因此，我们需要设置 ambiwidth=double 来解决这个问题。</p>
+</li>
+<li><p>filetype plugin indent on<br><br>开启文件类型自动识别，启用文件类型插件，启用针对文件类型的自动缩进。</p>
+</li>
+</ul>
+<h2 id="2-文本编辑设置"><a href="#2-文本编辑设置" class="headerlink" title="2 文本编辑设置"></a>2 文本编辑设置</h2><ul>
+<li><p>set sw=4<br><br>自动缩进的时候，缩进尺寸为 4 个空格。</p>
+</li>
+<li><p>set ts=4<br><br>Tab 宽度为 4 个字符。</p>
+</li>
+<li><p>set et（或者 set expandtab）<br><br>编辑时将所有 Tab 替换为空格。<br>该选项只在编辑时将 Tab 替换为空格，如果打开一个已经存在的文件，并不会将已有的 Tab 替换为空格。如果希望进行这样的替换的话，可以使用这条命令 “:retab”。</p>
+</li>
+<li><p>set smarttab<br><br>当使用 et 将 Tab 替换为空格之后，按下一个 Tab 键就能插入 4 个空格，但要想删除这 4 个空格，就得按 4 下 Backspace，这很不方便。设置 smarttab 之后，就可以只按一下 Backspace 就删除 4 个字符了。</p>
+</li>
+<li><p>set spell<br><br>打开拼写检查。拼写有错的单词下方会有红色波浪线，将光标放在单词上，按 <code>z=</code> 就会出现拼写建议，按 <code>]s</code> 可以直接跳到下一个拼写错误处。</p>
+</li>
+</ul>
+<h2 id="3-断行设置"><a href="#3-断行设置" class="headerlink" title="3 断行设置"></a>3 断行设置</h2><ul>
+<li><p>set tw=78<br><br>设置光标超过 78 列的时候折行。</p>
+</li>
+<li><p>set lbr<br><br>不在单词中间断行。设置了这个选项后，如果一行文字非常长，无法在一行内显示完的话，它会在单词与单词间的空白处断开，尽量不会把一个单词分成两截放在两个不同的行里。</p>
+</li>
+<li><p>set fo+=mB<br><br>打开断行模块对亚洲语言支持。m 表示允许在两个汉字之间断行，即使汉字之间没有出现空格。B 表示将两行合并为一行的时候，汉字与汉字之间不要补空格。该命令支持的更多的选项请参看用户手册。</p>
+</li>
+</ul>
+<h2 id="4-其他设置"><a href="#4-其他设置" class="headerlink" title="4 其他设置"></a>4 其他设置</h2><ul>
+<li><p>set selectmode=<br><br>不使用 selectmode。</p>
+</li>
+<li><p>set keymodel=<br><br>不使用 “Shift + 方向键” 选择文本，“Shift + 方向键” 代表向指定方向跳一个单词。如果你喜欢这项功能的话，可以使用 “set keymodel=startsel,stopsel” 打开它。</p>
+</li>
+<li><p>set selection=inclusive<br><br>指定在选择文本时，光标所在位置也属于被选中的范围。如果指定 selection=exclusive的话，可能会出现某些文本无法被选中的情况。</p>
+</li>
+<li><p>set wildmenu<br><br>在命令模式下使用 Tab 自动补全的时候，将补全内容使用一个漂亮的单行菜单形式显示出来。</p>
+</li>
+<li><p>colo desert<br><br>选择 desert 配色方案。VIM 里内置了许多关键字上色的配色方案，另外你还可以到网上下载更多配色方案，或是自己编写。点击“编辑”→“调色板”，就能列出所有支持的配色方案。你可以把“调色板”子菜单剪下来，然后慢慢选择，挑出一个你最喜欢的配色方案来。<br><br>配色方案,在/usr/share/vim/vim70/colors,还有如evening blue.vim, delek.vim, evening.vim, murphy.vim torte.vim, darkblue.vim, desert.vim, koehler.vim, pablo.vim, ron.vim, zellner.vim, default.vim, elflord.vim morning.vim, peachpuff.vim, shine.vim</p>
+</li>
+</ul>
+<h2 id="5-图形界面设置"><a href="#5-图形界面设置" class="headerlink" title="5 图形界面设置"></a>5 图形界面设置</h2><ul>
+<li><p>set nowrap<br><br>指定不折行。如果一行太长，超过屏幕宽度，则向右边延伸到屏幕外面。如果使用图形界面的话，指定不折行视觉效果会好很多。</p>
+</li>
+<li><p>set guioptions+=b<br><br>添加水平滚动条。如果你指定了不折行，那为窗口添加一个水平滚动条就非常有必要了。</p>
+</li>
+<li><p>set mousemodel=popup<br><br>当右键单击窗口的时候，弹出快捷菜单。</p>
+</li>
+<li><p>set guifont=Bitstream\ Vera\ Sans\ Mono\ 9<br><br>设置图形界面下的字体。你可以点“编辑”→“选择字体”，然后在对话框中选出你喜欢的字体与字号，选择完毕后，先按几下 ESC 确认处在 Normal 模式下，然后输入这条命令：“:set guifont?”回车后 gvim 屏幕最下方会显示出你当前所用的字体的名称与字号。将获得的结果写到配置文件里面就可以了，需要注意一点，如果字体名称里面含有空格的话，在抄的时候需要在所有空格前面加一个斜杠。</p>
+</li>
+</ul>
+<h2 id="6-条件选择"><a href="#6-条件选择" class="headerlink" title="6 条件选择"></a>6 条件选择</h2><p>同一个配色方案，在 gvim 下和字符界面的 vim 下效果大相径庭，滇狐个人的习惯是，在 gvim 下使用 torte 配色方案，在 vim 下使用 ron 配色方案。因此我们有必要针对 gvim 和 vim 进行不同的设置。</p>
+<p>另外，前面我们在 gvim 下不使用折行，开启水平滚动条，但在 vim 下，是没有滚动条可用的，因此还是有必要为 vim 保留自动折行。</p>
+<p>条件选择设置的格式如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (has(<span class="string">"gui_running"</span>))</span><br><span class="line"><span class="string">" 图形界面下的设置</span></span><br><span class="line"><span class="string">    set nowrap</span></span><br><span class="line"><span class="string">    set guioptions+=b</span></span><br><span class="line"><span class="string">    colo torte</span></span><br><span class="line"><span class="string">else</span></span><br><span class="line"><span class="string">"</span> 字符界面下的设置</span><br><span class="line">    set wrap</span><br><span class="line">    colo ron</span><br><span class="line">endif</span><br></pre></td></tr></table></figure>
+
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p><a href="http://edyfox.codecarver.org/html/_vimrc_for_beginners.html" target="_blank" rel="noopener">http://edyfox.codecarver.org/html/_vimrc_for_beginners.html</a><br><br><a href="https://gohom.win/2015/08/19/VIM_startupSetup/" target="_blank" rel="noopener">https://gohom.win/2015/08/19/VIM_startupSetup/</a><br><br><a href="https://segmentfault.com/a/1190000002562901" target="_blank" rel="noopener">https://segmentfault.com/a/1190000002562901</a><br></p>
+
+      
+       <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 jaytp@qq.com </span>
+    </div>
+</article>
+
+
+<p>
+    <a  class="dashang" onclick="dashangToggle()">赏</a>
+</p>
+
+
+<div class="article_copyright">
+    <p><span class="copy-title">文章标题:</span>初学者vim配置</p>
+    
+    <p><span class="copy-title">本文作者:</span><a  title="John Doe">John Doe</a></p>
+    <p><span class="copy-title">发布时间:</span>2020-01-20, 16:01:21</p>
+    <p><span class="copy-title">最后更新:</span>2020-01-20, 16:02:23</p>
+    <span class="copy-title">原始链接:</span><a class="post-url" href="/2020/01/20/%E5%B0%8F%E6%8A%80%E5%B7%A7/Common/Vim/%E5%88%9D%E5%AD%A6%E8%80%85vim%E9%85%8D%E7%BD%AE/" title="初学者vim配置">http://yoursite.com/2020/01/20/%E5%B0%8F%E6%8A%80%E5%B7%A7/Common/Vim/%E5%88%9D%E5%AD%A6%E8%80%85vim%E9%85%8D%E7%BD%AE/</a>
+    <p>
+        <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+    </p>
+</div>
+
+
+
+
+
+    
+
+
+
+
+    </div>
+    <div class="copyright">
+        <p class="footer-entry">©2016-2019 Yelog</p>
+<p class="footer-entry">Built with <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/yelog/hexo-theme-3-hexo" target="_blank">3-hexo</a> theme</p>
+
+    </div>
+    <div class="full-toc">
+        <button class="full"><span class="min "></span></button>
+<button class="post-toc-menu"><span class="post-toc-menu-icons"></span></button>
+<div class="post-toc"><span class="post-toc-title">目录</span>
+    <div class="post-toc-content">
+
+    </div>
+</div>
+<a class="" id="rocket" ></a>
+
+    </div>
+</div>
+<div class="acParent"></div>
+
+<div class="hide_box" onclick="dashangToggle()"></div>
+<div class="shang_box">
+    <a class="shang_close"  onclick="dashangToggle()">×</a>
+    <div class="shang_tit">
+        <p>喜欢就点赞,疼爱就打赏</p>
+    </div>
+    <div class="shang_payimg">
+        <div class="pay_img">
+            <img src="/img/alipay.jpg" class="alipay" title="扫码支持">
+            <img src="/img/weixin.jpg" class="weixin" title="扫码支持">
+        </div>
+    </div>
+    <div class="shang_payselect">
+        <span><label><input type="radio" name="pay" checked value="alipay">支付宝</label></span><span><label><input type="radio" name="pay" value="weixin">微信</label></span>
+    </div>
+</div>
+
+
+</body>
+<script src="/js/jquery.pjax.js?v=1.0.1" ></script>
+
+<script src="/js/script.js?v=1.0.1" ></script>
+<script>
+    var img_resize = 'default';
+    /*作者、标签的自动补全*/
+    $(function () {
+        $('.search').AutoComplete({
+            'data': ['#vscode','#linux','#command','#macos','#proxy','#springboot','#java','#plugin','#manjaro','#pacman','#software','#mac','#exception','#math','#计算机原理','#待分析','#spring','#docker','#jvm','#maven','#消费心理学','#生活','#情商','#耳机','#vim',],
+            'itemHeight': 20,
+            'width': 418
+        }).AutoComplete('show');
+    })
+    function initArticle() {
+        /*渲染对应的表格样式*/
+        
+            $(".post .pjax table").addClass("green_title");
+        
+
+        /*渲染打赏样式*/
+        
+        $("input[name=pay]").on("click", function () {
+            if($("input[name=pay]:checked").val()=="weixin"){
+                $(".shang_box .shang_payimg .pay_img").addClass("weixin_img");
+            } else {
+                $(".shang_box .shang_payimg .pay_img").removeClass("weixin_img");
+            }
+        })
+        
+
+        /*高亮代码块行号*/
+        
+        $('pre code').each(function(){
+            var lines = $(this).text().split('\n').length - 1, widther='';
+            if (lines>99) {
+                widther = 'widther'
+            }
+            var $numbering = $('<ul/>').addClass('pre-numbering ' + widther).attr("unselectable","on");
+            $(this).addClass('has-numbering ' + widther)
+                    .parent()
+                    .append($numbering);
+            for(var i=1;i<=lines;i++){
+                $numbering.append($('<li/>').text(i));
+            }
+        });
+        
+
+        /*访问数量*/
+        
+        $.getScript("//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js");
+        
+
+        /*代码高亮，行号对齐*/
+        $('.pre-numbering').css('line-height',$('.has-numbering').css('line-height'));
+
+        
+        
+    }
+
+    /*打赏页面隐藏与展示*/
+    
+    function dashangToggle() {
+        $(".shang_box").fadeToggle();
+        $(".hide_box").fadeToggle();
+    }
+    
+
+</script>
+
+<!--加入行号的高亮代码块样式-->
+
+<style>
+    pre{
+        position: relative;
+        margin-bottom: 24px;
+        border-radius: 10px;
+        border: 1px solid #e2dede;
+        background: #FFF;
+        overflow: hidden;
+    }
+    code.has-numbering{
+        margin-left: 30px;
+    }
+    code.has-numbering.widther{
+        margin-left: 35px;
+    }
+    .pre-numbering{
+        margin: 0px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 20px;
+        padding: 0.5em 3px 0.7em 5px;
+        border-right: 1px solid #C3CCD0;
+        text-align: right;
+        color: #AAA;
+        background-color: #fafafa;
+    }
+    .pre-numbering.widther {
+        width: 35px;
+    }
+</style>
+
+<!--自定义样式设置-->
+<style>
+    
+    
+    .nav {
+        width: 542px;
+    }
+    .nav.fullscreen {
+        margin-left: -542px;
+    }
+    .nav-left {
+        width: 120px;
+    }
+    
+    
+    @media screen and (max-width: 1468px) {
+        .nav {
+            width: 492px;
+        }
+        .nav.fullscreen {
+            margin-left: -492px;
+        }
+        .nav-left {
+            width: 100px;
+        }
+    }
+    
+    
+    @media screen and (max-width: 1024px) {
+        .nav {
+            width: 492px;
+            margin-left: -492px
+        }
+        .nav.fullscreen {
+            margin-left: 0;
+        }
+        .nav .hide-list.fullscreen {
+            left: 492px
+        }
+    }
+    
+    @media screen and (max-width: 426px) {
+        .nav {
+            width: 100%;
+        }
+        .nav-left {
+            width: 100%;
+        }
+    }
+    
+    
+    .nav-right .title-list nav a .post-title, .nav-right .title-list #local-search-result a .post-title {
+        color: #383636;
+    }
+    
+    
+    .nav-right .title-list nav a .post-date, .nav-right .title-list #local-search-result a .post-date {
+        color: #5e5e5f;
+    }
+    
+    
+    .nav-right nav a.hover, #local-search-result a.hover{
+        background-color: #e2e0e0;
+    }
+    
+    
+
+    /*列表样式*/
+    
+    .post .pjax article .article-entry>ol, .post .pjax article .article-entry>ul, .post .pjax article>ol, .post .pjax article>ul{
+        border: #e2dede solid 1px;
+        border-radius: 10px;
+        padding: 10px 32px 10px 56px;
+    }
+    .post .pjax article .article-entry li>ol, .post .pjax article .article-entry li>ul,.post .pjax article li>ol, .post .pjax article li>ul{
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
+    .post .pjax article .article-entry>ol>li, .post .pjax article .article-entry>ul>li,.post .pjax article>ol>li, .post .pjax article>ul>li{
+        margin-bottom: auto;
+        margin-left: auto;
+    }
+    .post .pjax article .article-entry li>ol>li, .post .pjax article .article-entry li>ul>li,.post .pjax article li>ol>li, .post .pjax article li>ul>li{
+        margin-bottom: auto;
+        margin-left: auto;
+    }
+    
+
+    /* 背景图样式 */
+    
+    
+
+
+    /*引用块样式*/
+    
+
+    /*文章列表背景图*/
+    
+    .nav-right:before {
+        content: ' ';
+        display: block;
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0.3;
+        background: url("https://i.loli.net/2019/07/22/5d3521411f3f169375.png");
+        background-repeat: no-repeat;
+        background-position: 50% 0;
+        -ms-background-size: cover;
+        -o-background-size: cover;
+        -moz-background-size: cover;
+        -webkit-background-size: cover;
+        background-size: cover;
+    }
+    
+
+    
+</style>
+
+
+
+
+
+
+
+</html>

@@ -1,0 +1,1431 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>JVM_常量池 | Hexo</title>
+  <meta name="keywords" content=" java , jvm ">
+  <meta name="description" content="JVM_常量池 | Hexo">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://yoursite.com/archives/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:locale" content="en_US">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="icon" href="/img/avatar.jpg">
+
+<link href="/css/style.css?v=1.0.1" rel="stylesheet">
+
+<link href="/css/hl_theme/atom-light.css?v=1.0.1" rel="stylesheet">
+
+<link href="//cdn.bootcss.com/animate.css/3.5.2/animate.min.css" rel="stylesheet">
+<link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="/js/jquery.autocomplete.min.js?v=1.0.1" ></script>
+
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+<script>
+    hljs.initHighlightingOnLoad();
+</script>
+
+<script src="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.js"></script>
+
+
+
+<script src="//cdn.bootcss.com/jquery-cookie/1.4.1/jquery.cookie.min.js" ></script>
+
+<script src="/js/iconfont.js?v=1.0.1" ></script>
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+<div style="display: none">
+  <input class="theme_disqus_on" value="false">
+  <input class="theme_preload_comment" value="false">
+  <input class="theme_blog_path" value="">
+</div>
+
+<body>
+<aside class="nav">
+    <div class="nav-left">
+        <a href="/" class="avatar_target">
+    <img class="avatar" src="/img/avatar.jpg" />
+</a>
+<div class="author">
+    <span>John Doe</span>
+</div>
+
+<div class="icon">
+    
+        
+        <a title="rss" href="/atom.xml" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-rss"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="github" href="https://github.com/yelog" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-github"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="facebook" href="https://www.facebook.com/faker.tops" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-facebook"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+    
+        
+    
+        
+        <a title="instagram" href="https://www.facebook.com/faker.tops" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-instagram"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="reddit" href="https://www.reddit.com/user/yelog/" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-reddit"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="weibo" href="http://weibo.com/u/2307534817" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-weibo"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="jianshu" href="https://www.jianshu.com/u/ff56736de7cf" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-jianshu"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="zhihu" href="https://www.zhihu.com/people/jaytp/activities" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-zhihu"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+    
+        
+        <a title="oschina" href="https://my.oschina.net/yelog" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-oschina"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+    
+        
+        <a title="email" href="mailto:jaytp@qq.com" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-email"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="qq" href="http://wpa.qq.com/msgrd?v=3&uin=872336115&site=qq&menu=yes" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-qq"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="kugou" href="https://www.kugou.com/" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-kugou"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="neteasemusic" href="https://music.163.com/#/user/home?id=88151013" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-neteasemusic"></use>
+                </svg>
+            
+        </a>
+        
+    
+</div>
+
+
+
+
+<ul>
+    <li><div class="all active">全部文章<small>(37)</small></div></li>
+    
+</ul>
+<div class="left-bottom">
+    <div class="menus">
+    
+    
+    
+    
+    </div>
+    <div><a class="about  hasFriend  site_url"  href="/about">关于</a><a style="width: 50%"  class="friends">友链</a></div>
+</div>
+<input type="hidden" id="yelog_site_posts_number" value="37">
+
+<div style="display: none">
+    <span id="busuanzi_value_site_uv"></span>
+    <span id="busuanzi_value_site_pv"></span>
+</div>
+
+    </div>
+    <div class="nav-right">
+        <div class="friends-area">
+    <div class="friends-title">
+        友情链接
+        <i class="back-title-list"></i>
+    </div>
+    <div class="friends-content">
+        <ul>
+            
+            <li><a target="_blank" href="http://yelog.org/">叶落阁</a></li>
+            
+        </ul>
+    </div>
+</div>
+        <div class="title-list">
+    <form onkeydown="if(event.keyCode==13){return false;}">
+        <input class="search" type="text" placeholder="Search..." autocomplete="off"id="local-search-input" >
+        <i class="cross"></i>
+        <span>
+            <label for="tagswitch">Tags:</label>
+            <input id="tagswitch" type="checkbox" style="display: none" />
+            <i id="tagsWitchIcon"></i>
+        </span>
+    </form>
+    <div class="tags-list">
+    
+    <li class="article-tag-list-item">
+        <a class="color2">vscode</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">linux</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">command</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">macos</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">proxy</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">springboot</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">java</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">plugin</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">manjaro</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">pacman</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">software</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">mac</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">exception</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">math</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">计算机原理</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">待分析</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">spring</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">docker</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">jvm</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">maven</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">消费心理学</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">生活</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">情商</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">耳机</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">vim</a>
+    </li>
+    
+    <div class="clearfix"></div>
+</div>
+
+    
+    <nav id="title-list-nav">
+        
+        <a  class=""
+           href="/2020/01/20/%E5%B7%A5%E5%85%B7/Linux/Manjaro%E5%AE%89%E8%A3%85%E5%8F%8A%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/"
+           data-tag="linux,manjaro,pacman,software"
+           data-author="" >
+            <span class="post-title" title="Manjaro安装及开发环境配置">Manjaro安装及开发环境配置</span>
+            <span class="post-date" title="2020-01-20 13:51:54">2020/01/20</span>
+        </a>
+        
+        <a  class=""
+           href="/2020/01/18/%E5%B7%A5%E5%85%B7/Linux/%E7%BB%88%E7%AB%AF%E4%BB%A3%E7%90%86/"
+           data-tag="linux,proxy"
+           data-author="" >
+            <span class="post-title" title="终端代理">终端代理</span>
+            <span class="post-date" title="2020-01-18 16:01:04">2020/01/18</span>
+        </a>
+        
+        <a  class=""
+           href="/2020/01/20/%E5%B7%A5%E5%85%B7/Mac/Hidden-Bar-%E6%8A%98%E5%8F%A0macOS%E8%8F%9C%E5%8D%95%E6%A0%8F/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="Hidden Bar,折叠macOS菜单栏">Hidden Bar,折叠macOS菜单栏</span>
+            <span class="post-date" title="2020-01-20 14:14:52">2020/01/20</span>
+        </a>
+        
+        <a  class=""
+           href="/2020/01/20/%E5%B7%A5%E5%85%B7/Mac/%E5%BF%AB%E9%80%9F%E6%89%93%E5%BC%80%E6%88%96%E5%88%87%E6%8D%A2%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E7%9A%84%E5%B7%A5%E5%85%B7-Thor/"
+           data-tag="software,mac"
+           data-author="" >
+            <span class="post-title" title="快速打开或切换应用程序的工具:Thor">快速打开或切换应用程序的工具:Thor</span>
+            <span class="post-date" title="2020-01-20 14:12:51">2020/01/20</span>
+        </a>
+        
+        <a  class=""
+           href="/2020/01/20/%E6%8A%80%E6%9C%AF/%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80%E8%AF%BE/%E8%BF%AD%E4%BB%A3%E6%B3%95/"
+           data-tag="math"
+           data-author="" >
+            <span class="post-title" title="迭代法">迭代法</span>
+            <span class="post-date" title="2020-01-20 14:21:03">2020/01/20</span>
+        </a>
+        
+        <a  class=""
+           href="/2020/01/20/%E6%8A%80%E6%9C%AF/Exception/foreach%E5%BE%AA%E7%8E%AF%E6%8A%A5%E9%94%99/"
+           data-tag="java,exception"
+           data-author="" >
+            <span class="post-title" title="foreach循环报错">foreach循环报错</span>
+            <span class="post-date" title="2020-01-20 14:19:47">2020/01/20</span>
+        </a>
+        
+        <a  class=""
+           href="/2020/01/20/%E6%8A%80%E6%9C%AF/%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80%E8%AF%BE/%E6%95%B0%E5%AD%A6%E5%BD%92%E7%BA%B3%E6%B3%95/"
+           data-tag="math"
+           data-author="" >
+            <span class="post-title" title="数学归纳法">数学归纳法</span>
+            <span class="post-date" title="2020-01-20 14:25:32">2020/01/20</span>
+        </a>
+        
+        <a  class=""
+           href="/2020/01/20/%E6%8A%80%E6%9C%AF/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%9F%BA%E7%A1%80/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="数据结构基础">数据结构基础</span>
+            <span class="post-date" title="2020-01-20 14:30:11">2020/01/20</span>
+        </a>
+        
+        <a  class=""
+           href="/2020/01/20/%E6%8A%80%E6%9C%AF/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8E%9F%E7%90%86/%E7%AE%80%E5%8D%95%E8%A7%A3%E9%87%8A%E5%99%A8/"
+           data-tag="计算机原理"
+           data-author="" >
+            <span class="post-title" title="简单&#34;解释器&#34;">简单&#34;解释器&#34;</span>
+            <span class="post-date" title="2020-01-20 14:28:20">2020/01/20</span>
+        </a>
+        
+        <a  class=""
+           href="/2020/01/20/%E6%8A%80%E6%9C%AF/Java/Java-%E6%A0%87%E7%AD%BE-label/"
+           data-tag="java"
+           data-author="" >
+            <span class="post-title" title="Java - 标签(label)">Java - 标签(label)</span>
+            <span class="post-date" title="2020-01-20 14:55:42">2020/01/20</span>
+        </a>
+        
+        <a  class=""
+           href="/2020/01/20/%E6%8A%80%E6%9C%AF/Java/transient%E4%BD%BF%E7%94%A8%E7%BB%86%E8%8A%82%E2%80%94%E2%80%94%E8%A2%ABtransient%E5%85%B3%E9%94%AE%E5%AD%97%E4%BF%AE%E9%A5%B0%E7%9A%84%E5%8F%98%E9%87%8F%E7%9C%9F%E7%9A%84%E4%B8%8D%E8%83%BD%E8%A2%AB%E5%BA%8F%E5%88%97%E5%8C%96%E5%90%97/"
+           data-tag="java"
+           data-author="" >
+            <span class="post-title" title="transient使用细节——被transient关键字修饰的变量真的不能被序列化吗?">transient使用细节——被transient关键字修饰的变量真的不能被序列化吗?</span>
+            <span class="post-date" title="2020-01-20 14:58:05">2020/01/20</span>
+        </a>
+        
+        <a  class=""
+           href="/2020/01/20/%E6%8A%80%E6%9C%AF/Java/transient%E5%85%B3%E9%94%AE%E5%AD%97%E4%BD%BF%E7%94%A8%E4%BB%A5%E5%8F%8AJava%E5%BA%8F%E5%88%97%E5%8C%96%E7%9A%84%E4%B8%A4%E7%A7%8D%E6%96%B9%E5%BC%8F/"
+           data-tag="java,待分析"
+           data-author="" >
+            <span class="post-title" title="transient关键字使用以及Java序列化的两种方式">transient关键字使用以及Java序列化的两种方式</span>
+            <span class="post-date" title="2020-01-20 14:57:05">2020/01/20</span>
+        </a>
+        
+        <a  class=""
+           href="/2020/01/20/%E6%8A%80%E6%9C%AF/Java/%E4%BB%80%E4%B9%88%E6%98%AFjava-awt/"
+           data-tag="java"
+           data-author="" >
+            <span class="post-title" title="什么是java.awt">什么是java.awt</span>
+            <span class="post-date" title="2020-01-20 14:46:43">2020/01/20</span>
+        </a>
+        
+        <a  class=""
+           href="/2020/01/19/%E6%8A%80%E6%9C%AF/SpringBoot%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/SpringBoot%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/"
+           data-tag="springboot,java"
+           data-author="" >
+            <span class="post-title" title="SpringBoot源码解读">SpringBoot源码解读</span>
+            <span class="post-date" title="2020-01-19 11:53:34">2020/01/19</span>
+        </a>
+        
+        <a  class=""
+           href="/2020/01/20/%E6%8A%80%E6%9C%AF/Java%E6%BA%90%E7%A0%81/%E6%AD%BB%E7%A3%95Java%E9%9B%86%E5%90%88%E4%B9%8BArrayList%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/"
+           data-tag="java,待分析"
+           data-author="" >
+            <span class="post-title" title="死磕Java集合之ArrayList源码分析">死磕Java集合之ArrayList源码分析</span>
+            <span class="post-date" title="2020-01-20 14:59:52">2020/01/20</span>
+        </a>
+        
+        <a  class=""
+           href="/2020/01/20/%E6%8A%80%E6%9C%AF/%E4%B8%80%E8%B5%B7%E5%AD%A6Spring/Spring%E7%BC%96%E7%A8%8B%E6%A8%A1%E5%9E%8B/"
+           data-tag="java,spring"
+           data-author="" >
+            <span class="post-title" title="Spring编程模型">Spring编程模型</span>
+            <span class="post-date" title="2020-01-20 14:41:59">2020/01/20</span>
+        </a>
+        
+        <a  class=""
+           href="/2020/01/20/%E6%8A%80%E6%9C%AF/Docker/Docker-Stats-%E6%9F%A5%E7%9C%8Bdocker%E5%8D%A0%E7%94%A8%E8%B5%84%E6%BA%90/"
+           data-tag="docker"
+           data-author="" >
+            <span class="post-title" title="Docker Stats: 查看docker占用资源">Docker Stats: 查看docker占用资源</span>
+            <span class="post-date" title="2020-01-20 14:45:09">2020/01/20</span>
+        </a>
+        
+        <a  class=""
+           href="/2020/01/20/%E6%8A%80%E6%9C%AF/Java%E6%BA%90%E7%A0%81/%E6%AD%BB%E7%A3%95java%E9%9B%86%E5%90%88%E4%B9%8BHashMap%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/"
+           data-tag="java,待分析"
+           data-author="" >
+            <span class="post-title" title="死磕java集合之HashMap源码分析">死磕java集合之HashMap源码分析</span>
+            <span class="post-date" title="2020-01-20 15:03:14">2020/01/20</span>
+        </a>
+        
+        <a  class=""
+           href="/2020/01/20/%E6%8A%80%E6%9C%AF/JVM/JVM-%E5%B8%B8%E9%87%8F%E6%B1%A0/"
+           data-tag="java,jvm"
+           data-author="" >
+            <span class="post-title" title="JVM_常量池">JVM_常量池</span>
+            <span class="post-date" title="2020-01-20 15:04:21">2020/01/20</span>
+        </a>
+        
+        <a  class=""
+           href="/2020/01/20/%E6%8A%80%E6%9C%AF/JVM/JVM-%E6%96%B9%E6%B3%95%E8%B0%83%E7%94%A8/"
+           data-tag="java,jvm"
+           data-author="" >
+            <span class="post-title" title="JVM_方法调用">JVM_方法调用</span>
+            <span class="post-date" title="2020-01-20 15:15:47">2020/01/20</span>
+        </a>
+        
+        <a  class=""
+           href="/2020/01/20/%E6%8A%80%E6%9C%AF/JVM/i++%E3%80%81++i%E5%AD%97%E8%8A%82%E7%A0%81/"
+           data-tag="java,jvm"
+           data-author="" >
+            <span class="post-title" title="i++、++i字节码">i++、++i字节码</span>
+            <span class="post-date" title="2020-01-20 15:19:02">2020/01/20</span>
+        </a>
+        
+        <a  class=""
+           href="/2020/01/20/%E6%8A%80%E6%9C%AF/JVM/JVM-%E5%AE%98%E6%96%B9%E6%96%87%E6%A1%A3/"
+           data-tag="java,jvm"
+           data-author="" >
+            <span class="post-title" title="JVM_官方文档">JVM_官方文档</span>
+            <span class="post-date" title="2020-01-20 15:18:27">2020/01/20</span>
+        </a>
+        
+        <a  class=""
+           href="/2020/01/20/%E6%8A%80%E6%9C%AF/Linux/echo%E5%91%BD%E4%BB%A4/"
+           data-tag="linux,command"
+           data-author="" >
+            <span class="post-title" title="echo命令">echo命令</span>
+            <span class="post-date" title="2020-01-20 15:21:30">2020/01/20</span>
+        </a>
+        
+        <a  class=""
+           href="/2020/01/20/%E6%8A%80%E6%9C%AF/Maven/dependencyManagement%E4%B8%8Edependencies%E5%8C%BA%E5%88%AB/"
+           data-tag="maven"
+           data-author="" >
+            <span class="post-title" title="dependencyManagement与dependencies区别">dependencyManagement与dependencies区别</span>
+            <span class="post-date" title="2020-01-20 15:24:08">2020/01/20</span>
+        </a>
+        
+        <a  class=""
+           href="/2020/01/20/%E6%8A%80%E6%9C%AF/Spring/Tomcat%E5%9C%A8SpringBoot%E4%B8%AD%E6%98%AF%E5%A6%82%E4%BD%95%E5%90%AF%E5%8A%A8%E7%9A%84/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="Tomcat在SpringBoot中是如何启动的">Tomcat在SpringBoot中是如何启动的</span>
+            <span class="post-date" title="2020-01-20 15:31:06">2020/01/20</span>
+        </a>
+        
+        <a  class=""
+           href="/2020/01/20/%E5%95%86%E5%AD%A6%E9%99%A2/%E5%A4%A7%E6%96%B9%E4%B8%8E%E5%B0%8F%E6%B0%94/"
+           data-tag="消费心理学"
+           data-author="" >
+            <span class="post-title" title="大方与小气">大方与小气</span>
+            <span class="post-date" title="2020-01-20 15:50:30">2020/01/20</span>
+        </a>
+        
+        <a  class=""
+           href="/2020/01/19/%E5%B0%8F%E6%8A%80%E5%B7%A7/Mac/Mac-OSX%E7%BB%88%E7%AB%AF%E8%B5%B0shadowsocks%E4%BB%A3%E7%90%86/"
+           data-tag="macos,proxy"
+           data-author="" >
+            <span class="post-title" title="Mac OSX终端走shadowsocks代理">Mac OSX终端走shadowsocks代理</span>
+            <span class="post-date" title="2020-01-19 14:53:33">2020/01/19</span>
+        </a>
+        
+        <a  class=""
+           href="/2020/01/20/%E4%BA%BA%E6%A0%BC/%E4%B8%8D%E5%90%9D%E8%B5%9E%E7%BE%8E/"
+           data-tag="生活,情商"
+           data-author="" >
+            <span class="post-title" title="不吝赞美">不吝赞美</span>
+            <span class="post-date" title="2020-01-20 16:05:49">2020/01/20</span>
+        </a>
+        
+        <a  class=""
+           href="/2020/01/20/%E5%B0%8F%E6%8A%80%E5%B7%A7/Linux/Linux%E5%A6%82%E4%BD%95%E8%AE%A9%E4%B8%80%E6%9D%A1%E5%91%BD%E4%BB%A4%E5%BF%AB%E9%80%9F%E4%BF%AE%E6%94%B9%E7%94%A8%E6%88%B7%E5%AF%86%E7%A0%81/"
+           data-tag="linux,command"
+           data-author="" >
+            <span class="post-title" title="Linux如何让一条命令快速修改用户密码?">Linux如何让一条命令快速修改用户密码?</span>
+            <span class="post-date" title="2020-01-20 15:57:06">2020/01/20</span>
+        </a>
+        
+        <a  class=""
+           href="/2020/01/20/%E5%B0%8F%E6%8A%80%E5%B7%A7/Linux/%E5%A6%82%E4%BD%95%E5%B0%86Linux%E7%9A%84Home%E7%9B%AE%E5%BD%95%E4%B8%8B%E7%9A%84%E6%96%87%E4%BB%B6%E5%A4%B9%E8%AE%BE%E7%BD%AE%E4%B8%BA%E8%8B%B1%E6%96%87/"
+           data-tag="linux"
+           data-author="" >
+            <span class="post-title" title="如何将Linux的Home目录下的文件夹设置为英文">如何将Linux的Home目录下的文件夹设置为英文</span>
+            <span class="post-date" title="2020-01-20 15:56:04">2020/01/20</span>
+        </a>
+        
+        <a  class=""
+           href="/2020/01/20/%E5%B0%8F%E6%8A%80%E5%B7%A7/Mac/MacOS%E9%85%8D%E7%BD%AE%E5%91%BD%E4%BB%A4%E8%A1%8C%E4%B8%8B%E4%BD%BF%E7%94%A8Sublime%E6%89%93%E5%BC%80%E6%96%87%E4%BB%B6/"
+           data-tag="software,mac"
+           data-author="" >
+            <span class="post-title" title="MacOS配置命令行下使用Sublime打开文件">MacOS配置命令行下使用Sublime打开文件</span>
+            <span class="post-date" title="2020-01-20 15:57:58">2020/01/20</span>
+        </a>
+        
+        <a  class=""
+           href="/2020/01/20/%E5%B0%8F%E6%8A%80%E5%B7%A7/Other/%E7%B4%A2%E5%B0%BCWH-1000XM3%E6%81%A2%E5%A4%8D%E5%87%BA%E5%8E%82%E8%AE%BE%E7%BD%AE/"
+           data-tag="耳机"
+           data-author="" >
+            <span class="post-title" title="索尼WH 1000XM3恢复出厂设置">索尼WH 1000XM3恢复出厂设置</span>
+            <span class="post-date" title="2020-01-20 15:58:54">2020/01/20</span>
+        </a>
+        
+        <a  class=""
+           href="/2020/01/20/%E5%B0%8F%E6%8A%80%E5%B7%A7/Common/Vscode/vscode%E5%B0%86tab%E8%BD%AC%E6%88%90%E7%A9%BA%E6%A0%BC/"
+           data-tag="vscode"
+           data-author="" >
+            <span class="post-title" title="vscode将tab转成空格">vscode将tab转成空格</span>
+            <span class="post-date" title="2020-01-20 16:03:56">2020/01/20</span>
+        </a>
+        
+        <a  class=""
+           href="/2020/01/20/%E5%B0%8F%E6%8A%80%E5%B7%A7/Common/Vim/vim%E5%B0%8F%E6%8A%80%E5%B7%A7/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="vim小技巧">vim小技巧</span>
+            <span class="post-date" title="2020-01-20 16:02:40">2020/01/20</span>
+        </a>
+        
+        <a  class=""
+           href="/2020/01/20/%E5%B0%8F%E6%8A%80%E5%B7%A7/Common/Vim/vim%E4%B8%ADdelete%EF%BC%88backspace%EF%BC%89%E9%94%AE%E4%B8%8D%E8%83%BD%E5%90%91%E5%B7%A6%E5%88%A0%E9%99%A4/"
+           data-tag="vim"
+           data-author="" >
+            <span class="post-title" title="vim中delete（backspace）键不能向左删除">vim中delete（backspace）键不能向左删除</span>
+            <span class="post-date" title="2020-01-20 16:03:16">2020/01/20</span>
+        </a>
+        
+        <a  class=""
+           href="/2020/01/20/%E5%B0%8F%E6%8A%80%E5%B7%A7/Common/Vim/%E5%88%9D%E5%AD%A6%E8%80%85vim%E9%85%8D%E7%BD%AE/"
+           data-tag="vim"
+           data-author="" >
+            <span class="post-title" title="初学者vim配置">初学者vim配置</span>
+            <span class="post-date" title="2020-01-20 16:01:21">2020/01/20</span>
+        </a>
+        
+        <a  class=""
+           href="/2020/01/16/%E5%B0%8F%E6%8A%80%E5%B7%A7/Common/Vscode/Vscode%E4%BD%BF%E7%94%A8setting-Sync%E6%8F%92%E4%BB%B6%E5%90%8C%E6%AD%A5%E8%AE%BE%E7%BD%AE/"
+           data-tag="vscode,plugin"
+           data-author="" >
+            <span class="post-title" title="Vscode使用setting Sync插件同步设置">Vscode使用setting Sync插件同步设置</span>
+            <span class="post-date" title="2020-01-16 17:49:36">2020/01/16</span>
+        </a>
+        
+    </nav>
+</div>
+    </div>
+    <div class="hide-list">
+        <div class="semicircle">
+            <div class="brackets first"><</div>
+            <div class="brackets">&gt;</div>
+        </div>
+    </div>
+</aside>
+<div class="post">
+    <div class="pjax">
+        <article id="post-技术/JVM/JVM-常量池" class="article article-type-post" itemscope itemprop="blogPost">
+    
+        <h1 class="article-title">JVM_常量池</h1>
+    
+    <div class="article-meta">
+        
+        
+        
+        
+        <span class="tag">
+            
+            <a class="color5">java</a>
+            
+            <a class="color4">jvm</a>
+            
+        </span>
+        
+    </div>
+    <div class="article-meta">
+        
+        创建时间:<time class="date" title='更新时间: 2020-01-20 15:17:19'>2020-01-20 15:04</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        
+        <span id="busuanzi_container_page_pv">
+            阅读:<span id="busuanzi_value_page_pv">
+                <span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </span>
+        </span>
+        
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#前言"><span class="toc-text">前言</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Class文件结构"><span class="toc-text">Class文件结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Class文件解析"><span class="toc-text">Class文件解析</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#magic"><span class="toc-text">magic</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#minor-version、major-version"><span class="toc-text">minor_version、major_version</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#constant-pool-count"><span class="toc-text">constant_pool_count</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#常量池结构剖析"><span class="toc-text">常量池结构剖析</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#表2-常量池中的-14-种常量项的结构总表"><span class="toc-text">表2: 常量池中的 14 种常量项的结构总表</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#常量项分析"><span class="toc-text">常量项分析</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#结语"><span class="toc-text">结语</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#彩蛋"><span class="toc-text">彩蛋</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#参考链接："><span class="toc-text">参考链接：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ClassFile查看工具"><span class="toc-text">ClassFile查看工具</span></a></li></ol>
+    
+<style>
+    .left-col .switch-btn,
+    .left-col .switch-area {
+        display: none;
+    }
+    .toc-level-3 i,
+    .toc-level-3 ol {
+        display: none !important;
+    }
+</style>
+</div>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>Java虚拟机实现语言无关性的基石就是Class文件。从我们写的java文件到通过编译器编译成java字节码文件（也就是.class文件），这个过程是java编译过程；而我们的java虚拟机执行的就是字节码文件。不论该字节码文件来自何方，由哪种编译器编译，甚至是手写字节码文件，只要符合java虚拟机的规范，那么它就能够执行该字节码文件。<br><br><br><img src="Java%E8%99%9A%E6%8B%9F%E6%9C%BA%E6%8F%90%E4%BE%9B%E7%9A%84%E8%AF%AD%E8%A8%80%E6%97%A0%E5%85%B3%E6%80%A7.webp" alt="Java虚拟机提供的语言无关性"></p>
+<h3 id="Class文件结构"><a href="#Class文件结构" class="headerlink" title="Class文件结构"></a>Class文件结构</h3><ul>
+<li>任何一个Class文件都对应着唯一一个类或接口的定义信息，但反过来，类或接口并不一定都得定义在文件里（譬如类或接口也可以通过类加载器直接生成）。<br></li>
+<li>Class文件是一个以8位字节为单位的二进制流，各个项目严格按照顺序紧凑的排列，中间没有任何分隔符。<br><br>每一个Class文件都对应着如下所示的<code>ClassFile</code>结构体：<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">ClassFile &#123;</span><br><span class="line">    u4 magic;</span><br><span class="line">    u2 minor_version;</span><br><span class="line">    u2 major_version;</span><br><span class="line">    u2 constant_pool_count;</span><br><span class="line">    cp_info constant_pool[constant_pool_count-<span class="number">1</span>];</span><br><span class="line">    u2 access_flags;</span><br><span class="line">    u2 this_class;</span><br><span class="line">    u2 super_class;</span><br><span class="line">    u2 interfaces_count;</span><br><span class="line">    u2 interfaces[interfaces_count];</span><br><span class="line">    u2 fields_count;</span><br><span class="line">    field_info fields[fields_count];</span><br><span class="line">    u2 methods_count;</span><br><span class="line">    method_info methods[methods_count];</span><br><span class="line">    u2 attributes_count;</span><br><span class="line">    attribute_info attributes[attributes_count];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+这个结构体中只有两种数据类型：无符号数和表。后面的解析都要以这两种数据类型为基础。</li>
+</ul>
+<p><strong>无符号数</strong>属于基本的数据类型，以u1、u2、u4和u8分别表示1个字节、2个字节、4个字节和8个字节的无符号数。无符号数可以用来描述数字、索引引用、数量值或者按照UTF-8编码构成字符串值。</p>
+<p><strong>表</strong>是由多个无符号数或者其他表作为数据项构成的复合数据结构，所有表都习惯性的以”_info”结尾。表用于描述有层次关系的复合结构的数据，整个Class文件本质上就是一张表。</p>
+<p>案例代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyTest2</span> </span>&#123;</span><br><span class="line">	String str = <span class="string">"Welcome"</span>;</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">int</span> x = <span class="number">5</span>;</span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> Integer in = <span class="number">10</span>;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		MyTest2 myTest2 = <span class="keyword">new</span> MyTest2();</span><br><span class="line">		myTest2.setX(<span class="number">8</span>);</span><br><span class="line">		in = <span class="number">20</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setX</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.x = x;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>对应的字节码文件格式（数据太多，截取部分）：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">cafe babe 0000 0037 0029 0a00 0a00 1c08</span><br><span class="line">001d 0900 0500 1e09 0005 001f 0700 200a</span><br><span class="line">0005 001c 0a00 0500 210a 0022 0023 0900</span><br><span class="line">0500 2407 0025 0100 0373 7472 0100 124c</span><br><span class="line">6a61 7661 2f6c 616e 672f 5374 7269 6e67</span><br><span class="line">3b01 0001 7801 0001 4901 0002 696e 0100</span><br><span class="line">134c 6a61 7661 2f6c 616e 672f 496e 7465</span><br><span class="line">6765 723b 0100 063c 696e 6974 3e01 0003</span><br><span class="line">2829 5601 0004 436f 6465 0100 0f4c 696e</span><br><span class="line">654e 756d 6265 7254 6162 6c65 0100 046d</span><br><span class="line">6169 6e01 0016 285b 4c6a 6176 612f 6c61</span><br><span class="line">6e67 2f53 7472 696e 673b 2956 0100 0473</span><br><span class="line">6574 5801 0004 2849 2956 0100 083c 636c</span><br><span class="line">696e 6974 3e01 000a 536f 7572 6365 4669</span><br><span class="line">6c65 0100 0c4d 7954 6573 7432 2e6a 6176</span><br><span class="line">610c 0011 0012 0100 0757 656c 636f 6d65</span><br><span class="line">0c00 0b00 0c0c 000d 000e 0100 1763 6f6d</span><br><span class="line">2f68 776a 2f73 7472 696e 6767 2f4d 7954</span><br><span class="line">6573 7432 0c00 1700 1807 0026 0c00 2700</span><br><span class="line">280c 000f 0010 0100 106a 6176 612f 6c61</span><br><span class="line">6e67 2f4f 626a 6563 7401 0011 6a61 7661</span><br><span class="line">2f6c 616e 672f 496e 7465 6765 7201 0007</span><br><span class="line">......</span><br><span class="line"></span><br><span class="line">---------------------------------------</span><br><span class="line">部分含义：</span><br><span class="line">cafe babe：魔数</span><br><span class="line">0000：minor_version</span><br><span class="line">0037：major_version</span><br><span class="line">0029：常量池元素个数</span><br><span class="line">0a：tag（CONSTANT_Methodref_info: 1+2+2&#x3D;5 字节）</span><br><span class="line">000a：class_index</span><br><span class="line">001c：name_and_type_index</span><br><span class="line">08：tag（CONSTANT_String_info: 1+2&#x3D;3 字节）</span><br><span class="line">......</span><br></pre></td></tr></table></figure>
+
+<h3 id="Class文件解析"><a href="#Class文件解析" class="headerlink" title="Class文件解析"></a>Class文件解析</h3><h3 id="magic"><a href="#magic" class="headerlink" title="magic"></a>magic</h3><p>魔数，u4类型的数据，占4个字节。魔数的唯一作用就是确定这个文件是否为一个能被JVM接受的Class文件。魔数值固定为<code>0xCAFEBABE</code>(咖啡宝贝)。</p>
+<h3 id="minor-version、major-version"><a href="#minor-version、major-version" class="headerlink" title="minor_version、major_version"></a>minor_version、major_version</h3><p>紧接着魔数之后的4个字节是Java版本信息：第5、6字节为次版本号(minor_version)，第7、8字节为主版本号(major_version)。</p>
+<p>以下为JDK版本与major_version的对照关系：</p>
+<table>
+<thead>
+<tr>
+<th align="center">序号</th>
+<th align="center">JDK版本</th>
+<th align="center">major_version</th>
+<th align="center">十六进制表示</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">1</td>
+<td align="center">1.1</td>
+<td align="center">45</td>
+<td align="center">0x2d</td>
+</tr>
+<tr>
+<td align="center">2</td>
+<td align="center">1.2</td>
+<td align="center">46</td>
+<td align="center">0x2e</td>
+</tr>
+<tr>
+<td align="center">3</td>
+<td align="center">1.3</td>
+<td align="center">47</td>
+<td align="center">0x2f</td>
+</tr>
+<tr>
+<td align="center">4</td>
+<td align="center">1.4</td>
+<td align="center">48</td>
+<td align="center">0x30</td>
+</tr>
+<tr>
+<td align="center">5</td>
+<td align="center">5</td>
+<td align="center">49</td>
+<td align="center">0x31</td>
+</tr>
+<tr>
+<td align="center">6</td>
+<td align="center">6</td>
+<td align="center">50</td>
+<td align="center">0x32</td>
+</tr>
+<tr>
+<td align="center">7</td>
+<td align="center">7</td>
+<td align="center">51</td>
+<td align="center">0x33</td>
+</tr>
+<tr>
+<td align="center">8</td>
+<td align="center">8</td>
+<td align="center">52</td>
+<td align="center">0x34</td>
+</tr>
+<tr>
+<td align="center">9</td>
+<td align="center">9</td>
+<td align="center">53</td>
+<td align="center">0x35</td>
+</tr>
+<tr>
+<td align="center">10</td>
+<td align="center">10</td>
+<td align="center">54</td>
+<td align="center">0x36</td>
+</tr>
+<tr>
+<td align="center">11</td>
+<td align="center">11</td>
+<td align="center">55</td>
+<td align="center">0x37</td>
+</tr>
+<tr>
+<td align="center">12</td>
+<td align="center">12</td>
+<td align="center">56</td>
+<td align="center">0x38</td>
+</tr>
+</tbody></table>
+<h3 id="constant-pool-count"><a href="#constant-pool-count" class="headerlink" title="constant_pool_count"></a>constant_pool_count</h3><p>常量池计数器，u2类型的数据。表示紧跟在它后面的常量池的元素个数。<code>0029=41</code>，<br>查看字节码<code>javap -c -v -l MyTest2.class</code></p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">Constant pool:</span><br><span class="line">   #1 = Methodref          #10.#28        // java/lang/Object."&lt;init&gt;":()V</span><br><span class="line">   #2 = String             #29            // Welcome</span><br><span class="line">   #3 = Fieldref           #5.#30         // com/hwj/stringg/MyTest2.str:Ljava/lang/String;</span><br><span class="line">   #4 = Fieldref           #5.#31         // com/hwj/stringg/MyTest2.x:I</span><br><span class="line">   #5 = Class              #32            // com/hwj/stringg/MyTest2</span><br><span class="line">   #6 = Methodref          #5.#28         // com/hwj/stringg/MyTest2."&lt;init&gt;":()V</span><br><span class="line">   #7 = Methodref          #5.#33         // com/hwj/stringg/MyTest2.setX:(I)V</span><br><span class="line">   #8 = Methodref          #34.#35        // java/lang/Integer.valueOf:(I)Ljava/lang/Integer;</span><br><span class="line">   #9 = Fieldref           #5.#36         // com/hwj/stringg/MyTest2.in:Ljava/lang/Integer;</span><br><span class="line">  #10 = Class              #37            // java/lang/Object</span><br><span class="line">  #11 = Utf8               str</span><br><span class="line">  #12 = Utf8               Ljava/lang/String;</span><br><span class="line">  #13 = Utf8               x</span><br><span class="line">  #14 = Utf8               I</span><br><span class="line">  #15 = Utf8               in</span><br><span class="line">  #16 = Utf8               Ljava/lang/Integer;</span><br><span class="line">  #17 = Utf8               &lt;init&gt;</span><br><span class="line">  #18 = Utf8               ()V</span><br><span class="line">  #19 = Utf8               Code</span><br><span class="line">  #20 = Utf8               LineNumberTable</span><br><span class="line">  #21 = Utf8               main</span><br><span class="line">  #22 = Utf8               ([Ljava/lang/String;)V</span><br><span class="line">  #23 = Utf8               setX</span><br><span class="line">  #24 = Utf8               (I)V</span><br><span class="line">  #25 = Utf8               &lt;clinit&gt;</span><br><span class="line">  #26 = Utf8               SourceFile</span><br><span class="line">  #27 = Utf8               MyTest2.java</span><br><span class="line">  #28 = NameAndType        #17:#18        // "&lt;init&gt;":()V</span><br><span class="line">  #29 = Utf8               Welcome</span><br><span class="line">  #30 = NameAndType        #11:#12        // str:Ljava/lang/String;</span><br><span class="line">  #31 = NameAndType        #13:#14        // x:I</span><br><span class="line">  #32 = Utf8               com/hwj/stringg/MyTest2</span><br><span class="line">  #33 = NameAndType        #23:#24        // setX:(I)V</span><br><span class="line">  #34 = Class              #38            // java/lang/Integer</span><br><span class="line">  #35 = NameAndType        #39:#40        // valueOf:(I)Ljava/lang/Integer;</span><br><span class="line">  #36 = NameAndType        #15:#16        // in:Ljava/lang/Integer;</span><br><span class="line">  #37 = Utf8               java/lang/Object</span><br><span class="line">  #38 = Utf8               java/lang/Integer</span><br><span class="line">  #39 = Utf8               valueOf</span><br><span class="line">  #40 = Utf8               (I)Ljava/lang/Integer;</span><br></pre></td></tr></table></figure>
+<p>但是，我们的常量池里的个数只有40个，而且索引还是从1开始的。<br>设计者将第0项空出来是有特殊考虑的，这样做的目的在于满足后面某些指向常量池的索引值的数据在特定情况下需要表达”不引用任何一个常量池项目”的含义，这种情况就可以把索引值置为0来表示。<br>根本原因在于，索引为0也是一个常量（保留常量），只不过它不位于常量表中。这个常量就对应Null值，所以常量池的索引从1而非0开始。</p>
+<h3 id="常量池结构剖析"><a href="#常量池结构剖析" class="headerlink" title="常量池结构剖析"></a>常量池结构剖析</h3><p>紧接其后的就是常量池了。一个Java类中定义的很多信息都是由常量池维护和描述的。可以将常量池看做Class文件的资源库。比如：Java定义的方法和变量信息，都是存储在常量池中。常量池中主要存储两类常量：字面常量和符号引用。字面常量，如文本字符串，而符号引用如类和接口的全局限定名，字段的名称和描述符，方法的名称和描述符等。</p>
+<p>注意：常量池中存储的不一定是不变的量！如 <strong>private int x = 5</strong>，x是变量，但 “x”这个变量名字依然存在常量池中。</p>
+<p>我们也可以把常量池当做一个数组（常量池中的每一项常量都是一个表），与一般数组不同的是，常量池数组中不同的元素类型，结构都是不同的，长度当然也不相同；但是每一个元素的第一个数据都是 u1 类型，该字节是个标志位，占 1 个字节。JVM 在解析常量池时，会根据这个 u1 类型来获取元素的具体类型。目前，常量池中出现的常量类型有 14 种，如下表：</p>
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th align="center">标志</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>CONSTANT_Utf8_info</td>
+<td align="center">1</td>
+<td>UTF-8 编码的字符串</td>
+</tr>
+<tr>
+<td>CONSTANT_Integer_info</td>
+<td align="center">3</td>
+<td>整型字面量</td>
+</tr>
+<tr>
+<td>CONSTANT_Float_info</td>
+<td align="center">4</td>
+<td>浮点型字面量</td>
+</tr>
+<tr>
+<td>CONSTANT_Long_info</td>
+<td align="center">5</td>
+<td>整型字面量</td>
+</tr>
+<tr>
+<td>CONSTANT_Double_info</td>
+<td align="center">6</td>
+<td>双精度浮点型字面量</td>
+</tr>
+<tr>
+<td>CONSTANT_Class_info</td>
+<td align="center">7</td>
+<td>类或接口的符号引用</td>
+</tr>
+<tr>
+<td>CONSTANT_String_info</td>
+<td align="center">8</td>
+<td>字符串类型字面量</td>
+</tr>
+<tr>
+<td>CONSTANT_Fieldref_info</td>
+<td align="center">9</td>
+<td>字段的符号引用</td>
+</tr>
+<tr>
+<td>CONSTANT_Methodref_info</td>
+<td align="center">10</td>
+<td>类中方法的符号引用</td>
+</tr>
+<tr>
+<td>CONSTANT_InterfaceMethodref_info</td>
+<td align="center">11</td>
+<td>接口中方法的符号引用</td>
+</tr>
+<tr>
+<td>CONSTANT_NameAndType_info</td>
+<td align="center">12</td>
+<td>字段或方法的符号引用</td>
+</tr>
+<tr>
+<td>CONSTANT_MethodHandle_info</td>
+<td align="center">15</td>
+<td>表示方法句柄</td>
+</tr>
+<tr>
+<td>CONSTANT_MethodType_info</td>
+<td align="center">16</td>
+<td>表示方法类型</td>
+</tr>
+<tr>
+<td>CONSTANT_InvokeDynamic_info</td>
+<td align="center">18</td>
+<td>表示一个动态方法调用点</td>
+</tr>
+</tbody></table>
+<h4 id="表2-常量池中的-14-种常量项的结构总表"><a href="#表2-常量池中的-14-种常量项的结构总表" class="headerlink" title="表2: 常量池中的 14 种常量项的结构总表"></a>表2: 常量池中的 14 种常量项的结构总表</h4> <!-- <table border="2" bordercolor="black" width="300" cellspacing="0" cellpadding="5"> -->
+ <table>
+    <tr>
+        <td>常量</td>
+        <td>项目</td>
+        <td>类型</td>
+        <td>描述</td>
+    </tr>
+    <tr>
+        <td rowspan="3">CONSTANT_Utf8_info</td>
+        <td>tag</td>
+        <td>u1</td>
+        <td>值为 1</td>
+    </tr>
+    <tr>
+        <td>length</td>
+        <td>u2</td>
+        <td>UTF-8 编码的字符串占用的字节数</td>
+    </tr>
+    <tr>
+        <td>bytes</td>
+        <td>u1</td>
+        <td>长度为 length 的 UTF-8 编码的字符串</td>
+    </tr>
+    <tr>
+        <td rowspan="2">CONSTANT_Integer_info</td>
+        <td>tag</td>
+        <td>u1</td>
+        <td>值为 3</td>
+    </tr>
+    <tr>
+        <td>bytes</td>
+        <td>u4</td>
+        <td>按照高位在前存储的 int 值</td>
+    </tr>
+    <tr>
+        <td rowspan="2">CONSTANT_Float_info</td>
+        <td>tag</td>
+        <td>u1</td>
+        <td>值为 4</td>
+    </tr>
+    <tr>
+        <td>bytes</td>
+        <td>u4</td>
+        <td>按照高位在前存储的 float 值</td>
+    </tr>
+    <tr>
+        <td rowspan="2">CONSTANT_Long_info</td>
+        <td>tag</td>
+        <td>u1</td>
+        <td>值为 5</td>
+    </tr>
+    <tr>
+        <td>bytes</td>
+        <td>u8</td>
+        <td>按照高位在前存储的 long 值</td>
+    </tr>
+    <tr>
+        <td rowspan="2">CONSTANT_Double_info</td>
+        <td>tag</td>
+        <td>u1</td>
+        <td>值为 6</td>
+    </tr>
+    <tr>
+        <td>bytes</td>
+        <td>u8</td>
+        <td>按照高位在前存储的 double 值</td>
+    </tr>
+    <tr>
+        <td rowspan="2">CONSTANT_Class_info</td>
+        <td>tag</td>
+        <td>u1</td>
+        <td>值为 7</td>
+    </tr>
+    <tr>
+        <td>index</td>
+        <td>u2</td>
+        <td>指向全限定名常量项的索引</td>
+    </tr>
+    <tr>
+        <td rowspan="2">CONSTANT_String_info</td>
+        <td>tag</td>
+        <td>u1</td>
+        <td>值为 8</td>
+    </tr>
+    <tr>
+        <td>index</td>
+        <td>u2</td>
+        <td>指向字符串字面量的索引</td>
+    </tr>
+    <tr>
+        <td rowspan="3">CONSTANT_Fieldref_info</td>
+        <td>tag</td>
+        <td>u1</td>
+        <td>值为 9</td>
+    </tr>
+    <tr>
+        <td>index</td>
+        <td>u2</td>
+        <td>指向声明字段的类或者接口描述符 CONSTANT_Class_info 的索引项</td>
+    </tr>
+    <tr>
+        <td>index</td>
+        <td>u2</td>
+        <td>指向字段描述符 CONSTANT_NameAndType 的索引项</td>
+    </tr>
+    <tr>
+        <td rowspan="3">CONSTANT_Methodref_info</td>
+        <td>tag</td>
+        <td>u1</td>
+        <td>值为 10</td>
+    </tr>
+    <tr>
+        <td>index</td>
+        <td>u2</td>
+        <td>指向声明方法的类描述符 CONSTANT_Class_info 的索引项</td>
+    </tr>
+    <tr>
+        <td>index</td>
+        <td>u2</td>
+        <td>指向名称及类型描述符 CONSTANT_NameAndType 的索引项</td>
+    </tr>
+    <tr>
+        <td rowspan="3">CONSTANT_InterfaceMethodref_info</td>
+        <td>tag</td>
+        <td>u1</td>
+        <td>值为 11</td>
+    </tr>
+    <tr>
+        <td>index</td>
+        <td>u2</td>
+        <td>指向声明方法的接口描述符 CONSTANT_Class_info 的索引项</td>
+    </tr>
+    <tr>
+        <td>index</td>
+        <td>u2</td>
+        <td>指向名称及类型描述符 CONSTANT_NameAndType 的索引项</td>
+    </tr>
+    <tr>
+        <td rowspan="3">CONSTANT_NameAndType_info</td>
+        <td>tag</td>
+        <td>u1</td>
+        <td>值为 12</td>
+    </tr>
+    <tr>
+        <td>index</td>
+        <td>u2</td>
+        <td>指向该字段或方法名称常量项的索引</td>
+    </tr>
+    <tr>
+        <td>index</td>
+        <td>u2</td>
+        <td>指向该字段或方法描述符常量项的索引</td>
+    </tr>
+    <tr>
+        <td rowspan="3">CONSTANT_MethodHandle_info</td>
+        <td>tag</td>
+        <td>u1</td>
+        <td>值为 15</td>
+    </tr>
+    <tr>
+        <td>reference_kind</td>
+        <td>u1</td>
+        <td>值必须在 1 ~ 9 之间（包含 1 和 9），它决定了方法句柄的类型。方法句柄类型的值表示方法句柄的字节码行为</td>
+    </tr>
+    <tr>
+        <td>reference_index</td>
+        <td>u2</td>
+        <td>值必须是常量池的有效索引</td>
+    </tr>
+    <tr>
+        <td rowspan="2">CONSTANT_MethodType_info</td>
+        <td>tag</td>
+        <td>u1</td>
+        <td>值为 16</td>
+    </tr>
+    <tr>
+        <td>descriptor_index</td>
+        <td>u2</td>
+        <td>值必须是对常量池的有效索引，常量池在该索引处的项必须是 CONSTANT_Utf8_info 结构，表示方法的描述符</td>
+    </tr>
+    <tr>
+        <td rowspan="3">CONSTANT_InvokeDynamic_info</td>
+        <td>tag</td>
+        <td>u1</td>
+        <td>值为 18</td>
+    </tr>
+    <tr>
+        <td>bootstrap_method_attr_index</td>
+        <td>u2</td>
+        <td>值必须是对当前 Class 文件中引导方法表的 bootstrap_methods[] 数组的有效索引</td>
+    </tr>
+    <tr>
+        <td>name_and_type_index</td>
+        <td>u2</td>
+        <td>值必须是对当前常量池的有效索引，常量池在该索引处的项必须是 CONSTANT_NameAndType_info 结构，表示方法名和方法描述符</td>
+    </tr>
+</table>
+
+<p>有了这张表就可以继续剖析常量池的内容了，常量池第一个字节就是一个标志位，0x0a=10，说明第一个常量类型是 CONSTANT_Methodref_info。这是一个表类型，它对应的结构是：<br></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">CONSTANT_Methodref_info &#123;</span><br><span class="line">    u1 tag;</span><br><span class="line">    u2 class_index;</span><br><span class="line">    u2 name_and_type_index;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>可知该类型常量占 1+2+2=5 个字节。紧接着后面就是第二个元素。同样的，开始是一个标志位，即 0x08=8，可知，第二个常量是 CONSTANT_String_info 类型。CONSTANT_String_info 用于表示 <code>java.lang.String</code> 类型的常量对象，格式如下：<br></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">CONSTANT_String_info &#123;</span><br><span class="line">    u1 tag;</span><br><span class="line">    u2 string_index;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>所以常量池的第二个元素占 3 个字节。按照这个套餐，我们就可以找出每一个常量了。一直说到第46个常量，常量池就结束了。</p>
+<h3 id="常量项分析"><a href="#常量项分析" class="headerlink" title="常量项分析"></a>常量项分析</h3><p>第一个常量是 CONSTANT_Methodref_info 类型的，它描述了类中方法的符号引用。class_index 项的值必须是对常量池的有效索引，常量池在该索引处的项必须是 CONSTANT_Class_info 结构，表示一个类或接口。</p>
+<ul>
+<li>class_index 表示的索引值是 0x000a=10。根据之前 <code>javap -v</code> 输出的常量池信息：<code>#10 = Class              #37            // java/lang/Object</code>，我们可以知道常量池的 #10 项是 CONSTANT_Class_info 类型的常量。该类型常量用于表示类或接口，格式如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">CONSTANT_Class_info &#123;</span><br><span class="line">    u1 tag;</span><br><span class="line">    u2 name_index;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+name_index 的值，必须是对常量池的一个有效索引。常量池在该索引处的项必须是 CONSTANT_Utf8_info 结构，代表一个有效的类或接口二进制名称的内部形式。<br><br>name_index 表示的索引值是 37，（这里我直接从上面的常量池信息读出<code>#10 = Class              #37            // java/lang/Object</code>，如果从字节码里看，此处值为 0x25=37）。所以接着找常量池第 37 项的常量类型，是 CONSTANT_Utf8_info 类型，用于表示字符串常量的值，结构如下：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">CONSTANT_Utf8_info &#123;</span><br><span class="line">    u1 tag;</span><br><span class="line">    u2 lenght;</span><br><span class="line">    u1 bytes[lenght];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+其中，length 项的值指明了  bytes[] 数组的长度，bytes[] 是表示字符串值的 byte 数组。 在这里，我把字符串常量池中 #37 处常量的16进制值单独拿出来看。下图框起来的部分就是完成的 CONSTANT_Utf8_info 类型常量（这里是第 #37 个常量）表示：</li>
+</ul>
+<p><img src="CONSTANT_Utf8_info.webp" alt="CONSTANT_Utf8_info"></p>
+<p>第一个字节是标志位，0x01=1。说明此常量类型是 CONSTANT_Utf8_info。后面2个字节是 0x10=16，表示后面 bytes[] 长度为16.所以往后数 16 个字节就是整个它表示的字符串常量。</p>
+<p>bytes[] 第一个字节值，0x6a。根据<a href="http://ascii.911cha.com/" target="_blank" rel="noopener">ASCII码对照表</a>，代表的字符是 “j”。依次的，第二个字节 0x61，代表 “a”，等等。把 16 个字节看完就得到了字符串常量 “java/lang/Object”。好了这表示一个类的全限定名。</p>
+<p>到此，我们就把第一个常量的结构中的 class_index 解析完了。</p>
+<ul>
+<li>name_and_type_index 表示的索引值 0x001c=28。根据之前 <code>javap -v</code> 输出的常量池信息：<code>#28 = NameAndType        #17:#18        // &quot;&lt;init&gt;&quot;:()V</code>，我们可以知道常量池的 #28 项是 CONSTANT_NameAndType_info 类型的常量。它表示当前字段或方法的名字和描述符。</li>
+</ul>
+<p>后面的常量池信息，可以自行分析。</p>
+<h3 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h3><p>本节讲的常量池时Class文件中的常量池，要记住还有运行时常量池，每个Class文件中的常量池内容在类加载时会进入方法去的运行时常量池中存放。当然运行时常量池的内容不仅包含这些还包含运行期加入的常量，常见的就是String类的intern()方法。</p>
+<h3 id="彩蛋"><a href="#彩蛋" class="headerlink" title="彩蛋"></a>彩蛋</h3><p>最后再附上一张 ClassFile 反编译后的图:<br><br><img src="ClassFile%E5%8F%8D%E7%BC%96%E8%AF%91.webp" alt="ClassFile反编译"></p>
+<h3 id="参考链接："><a href="#参考链接：" class="headerlink" title="参考链接："></a>参考链接：</h3><p><a href="https://www.jianshu.com/p/d8492e748c57" target="_blank" rel="noopener">https://www.jianshu.com/p/d8492e748c57</a> <br><br><a href="http://ascii.911cha.com" target="_blank" rel="noopener">http://ascii.911cha.com</a></p>
+<h3 id="ClassFile查看工具"><a href="#ClassFile查看工具" class="headerlink" title="ClassFile查看工具"></a>ClassFile查看工具</h3><p><a href="https://github.com/ingokegel/jclasslib/releases" target="_blank" rel="noopener">jclasslib-github</a></p>
+
+      
+       <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 jaytp@qq.com </span>
+    </div>
+</article>
+
+
+<p>
+    <a  class="dashang" onclick="dashangToggle()">赏</a>
+</p>
+
+
+<div class="article_copyright">
+    <p><span class="copy-title">文章标题:</span>JVM_常量池</p>
+    
+    <p><span class="copy-title">本文作者:</span><a  title="John Doe">John Doe</a></p>
+    <p><span class="copy-title">发布时间:</span>2020-01-20, 15:04:21</p>
+    <p><span class="copy-title">最后更新:</span>2020-01-20, 15:17:19</p>
+    <span class="copy-title">原始链接:</span><a class="post-url" href="/2020/01/20/%E6%8A%80%E6%9C%AF/JVM/JVM-%E5%B8%B8%E9%87%8F%E6%B1%A0/" title="JVM_常量池">http://yoursite.com/2020/01/20/%E6%8A%80%E6%9C%AF/JVM/JVM-%E5%B8%B8%E9%87%8F%E6%B1%A0/</a>
+    <p>
+        <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+    </p>
+</div>
+
+
+
+
+
+    
+
+
+
+
+    </div>
+    <div class="copyright">
+        <p class="footer-entry">©2016-2019 Yelog</p>
+<p class="footer-entry">Built with <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/yelog/hexo-theme-3-hexo" target="_blank">3-hexo</a> theme</p>
+
+    </div>
+    <div class="full-toc">
+        <button class="full"><span class="min "></span></button>
+<button class="post-toc-menu"><span class="post-toc-menu-icons"></span></button>
+<div class="post-toc"><span class="post-toc-title">目录</span>
+    <div class="post-toc-content">
+
+    </div>
+</div>
+<a class="" id="rocket" ></a>
+
+    </div>
+</div>
+<div class="acParent"></div>
+
+<div class="hide_box" onclick="dashangToggle()"></div>
+<div class="shang_box">
+    <a class="shang_close"  onclick="dashangToggle()">×</a>
+    <div class="shang_tit">
+        <p>喜欢就点赞,疼爱就打赏</p>
+    </div>
+    <div class="shang_payimg">
+        <div class="pay_img">
+            <img src="/img/alipay.jpg" class="alipay" title="扫码支持">
+            <img src="/img/weixin.jpg" class="weixin" title="扫码支持">
+        </div>
+    </div>
+    <div class="shang_payselect">
+        <span><label><input type="radio" name="pay" checked value="alipay">支付宝</label></span><span><label><input type="radio" name="pay" value="weixin">微信</label></span>
+    </div>
+</div>
+
+
+</body>
+<script src="/js/jquery.pjax.js?v=1.0.1" ></script>
+
+<script src="/js/script.js?v=1.0.1" ></script>
+<script>
+    var img_resize = 'default';
+    /*作者、标签的自动补全*/
+    $(function () {
+        $('.search').AutoComplete({
+            'data': ['#vscode','#linux','#command','#macos','#proxy','#springboot','#java','#plugin','#manjaro','#pacman','#software','#mac','#exception','#math','#计算机原理','#待分析','#spring','#docker','#jvm','#maven','#消费心理学','#生活','#情商','#耳机','#vim',],
+            'itemHeight': 20,
+            'width': 418
+        }).AutoComplete('show');
+    })
+    function initArticle() {
+        /*渲染对应的表格样式*/
+        
+            $(".post .pjax table").addClass("green_title");
+        
+
+        /*渲染打赏样式*/
+        
+        $("input[name=pay]").on("click", function () {
+            if($("input[name=pay]:checked").val()=="weixin"){
+                $(".shang_box .shang_payimg .pay_img").addClass("weixin_img");
+            } else {
+                $(".shang_box .shang_payimg .pay_img").removeClass("weixin_img");
+            }
+        })
+        
+
+        /*高亮代码块行号*/
+        
+        $('pre code').each(function(){
+            var lines = $(this).text().split('\n').length - 1, widther='';
+            if (lines>99) {
+                widther = 'widther'
+            }
+            var $numbering = $('<ul/>').addClass('pre-numbering ' + widther).attr("unselectable","on");
+            $(this).addClass('has-numbering ' + widther)
+                    .parent()
+                    .append($numbering);
+            for(var i=1;i<=lines;i++){
+                $numbering.append($('<li/>').text(i));
+            }
+        });
+        
+
+        /*访问数量*/
+        
+        $.getScript("//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js");
+        
+
+        /*代码高亮，行号对齐*/
+        $('.pre-numbering').css('line-height',$('.has-numbering').css('line-height'));
+
+        
+        
+    }
+
+    /*打赏页面隐藏与展示*/
+    
+    function dashangToggle() {
+        $(".shang_box").fadeToggle();
+        $(".hide_box").fadeToggle();
+    }
+    
+
+</script>
+
+<!--加入行号的高亮代码块样式-->
+
+<style>
+    pre{
+        position: relative;
+        margin-bottom: 24px;
+        border-radius: 10px;
+        border: 1px solid #e2dede;
+        background: #FFF;
+        overflow: hidden;
+    }
+    code.has-numbering{
+        margin-left: 30px;
+    }
+    code.has-numbering.widther{
+        margin-left: 35px;
+    }
+    .pre-numbering{
+        margin: 0px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 20px;
+        padding: 0.5em 3px 0.7em 5px;
+        border-right: 1px solid #C3CCD0;
+        text-align: right;
+        color: #AAA;
+        background-color: #fafafa;
+    }
+    .pre-numbering.widther {
+        width: 35px;
+    }
+</style>
+
+<!--自定义样式设置-->
+<style>
+    
+    
+    .nav {
+        width: 542px;
+    }
+    .nav.fullscreen {
+        margin-left: -542px;
+    }
+    .nav-left {
+        width: 120px;
+    }
+    
+    
+    @media screen and (max-width: 1468px) {
+        .nav {
+            width: 492px;
+        }
+        .nav.fullscreen {
+            margin-left: -492px;
+        }
+        .nav-left {
+            width: 100px;
+        }
+    }
+    
+    
+    @media screen and (max-width: 1024px) {
+        .nav {
+            width: 492px;
+            margin-left: -492px
+        }
+        .nav.fullscreen {
+            margin-left: 0;
+        }
+        .nav .hide-list.fullscreen {
+            left: 492px
+        }
+    }
+    
+    @media screen and (max-width: 426px) {
+        .nav {
+            width: 100%;
+        }
+        .nav-left {
+            width: 100%;
+        }
+    }
+    
+    
+    .nav-right .title-list nav a .post-title, .nav-right .title-list #local-search-result a .post-title {
+        color: #383636;
+    }
+    
+    
+    .nav-right .title-list nav a .post-date, .nav-right .title-list #local-search-result a .post-date {
+        color: #5e5e5f;
+    }
+    
+    
+    .nav-right nav a.hover, #local-search-result a.hover{
+        background-color: #e2e0e0;
+    }
+    
+    
+
+    /*列表样式*/
+    
+    .post .pjax article .article-entry>ol, .post .pjax article .article-entry>ul, .post .pjax article>ol, .post .pjax article>ul{
+        border: #e2dede solid 1px;
+        border-radius: 10px;
+        padding: 10px 32px 10px 56px;
+    }
+    .post .pjax article .article-entry li>ol, .post .pjax article .article-entry li>ul,.post .pjax article li>ol, .post .pjax article li>ul{
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
+    .post .pjax article .article-entry>ol>li, .post .pjax article .article-entry>ul>li,.post .pjax article>ol>li, .post .pjax article>ul>li{
+        margin-bottom: auto;
+        margin-left: auto;
+    }
+    .post .pjax article .article-entry li>ol>li, .post .pjax article .article-entry li>ul>li,.post .pjax article li>ol>li, .post .pjax article li>ul>li{
+        margin-bottom: auto;
+        margin-left: auto;
+    }
+    
+
+    /* 背景图样式 */
+    
+    
+
+
+    /*引用块样式*/
+    
+
+    /*文章列表背景图*/
+    
+    .nav-right:before {
+        content: ' ';
+        display: block;
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0.3;
+        background: url("https://i.loli.net/2019/07/22/5d3521411f3f169375.png");
+        background-repeat: no-repeat;
+        background-position: 50% 0;
+        -ms-background-size: cover;
+        -o-background-size: cover;
+        -moz-background-size: cover;
+        -webkit-background-size: cover;
+        background-size: cover;
+    }
+    
+
+    
+</style>
+
+
+
+
+
+
+
+</html>
